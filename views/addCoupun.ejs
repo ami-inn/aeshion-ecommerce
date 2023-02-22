@@ -1,0 +1,184 @@
+<%- include('adminheader') %>
+
+
+<body>
+
+
+
+    <!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">Aeshion</span>
+		</a>
+		<ul class="side-menu top">
+			<li >
+				<a href="/admin/">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bxs-shopping-bag-alt' ></i>
+					<span class="text">Product Management</span>
+				</a>
+			</li>
+			<li>
+				<a href="contacts.html">
+					<i class='bx bxs-doughnut-chart' ></i>
+					<span class="text">Order Management</span>
+				</a>
+			</li>
+			<li class="active" >
+				<a href="#">
+					<i class='bx bxs-message-dots' ></i>
+					<span class="text">Category Management</span>
+				</a>
+			</li>
+			<li >
+				<a href="#">
+					<i class='bx bxs-group' ></i>
+					<span class="text">User Management</span>
+				</a>
+			</li>
+
+            <li>
+				<a href="#">
+					<i class='bx bxs-cog' ></i>
+					<span class="text">Banner Management</span>
+				</a>
+			</li>
+
+            <li>
+				<a href="#">
+					<i class='bx bxs-cog' ></i>
+					<span class="text">Coupun Management</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			
+			<li>
+				<a href="#" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+    <section id="content">
+		<!-- NAVBAR -->	
+		<main>
+			
+
+            <div class="p-t-130 p-b-100 font-poppins">
+
+    
+            
+                 
+                <div class="wrapper wrapper--w680">
+                    <div class="card card-4">
+                    <div class="card-body">
+                        <h2 class="title">Add Coupun</h2>
+                        
+                        
+                        <form  action="/admin/add-coupon" method="post" >
+                            <div class="row row-space">
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">Coupun name</label>
+                                        <input class="input--style-4" type="text" name="name" placeholder="name">
+                                    </div>
+                                </div>
+
+								<div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">Coupun Code</label>
+                                        <input class="input--style-4" type="text" name="code" placeholder="code">
+                                    </div>
+                                </div>
+                            
+                            </div>
+
+							<div class="row row-space">
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">Min Amount</label>
+                                        <input class="input--style-4" type="number" name="minAmount" placeholder="amount">
+                                    </div>
+                                </div>
+
+								<div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">Cashback</label>
+                                        <input class="input--style-4" type="number" name="cashback" placeholder="cashback">
+                                    </div>
+                                </div>
+                            
+                            </div>
+
+							<div class="row row-space">
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">Expiry</label>
+                                        <input class="input--style-4" type="date" name="expiry" placeholder="date">
+                                    </div>
+                                </div>
+
+								<div class="col-2">
+									<div class="p-t-15">
+										<button class="btn btn--radius-2 btn--blue" type="submit">Add Coupon</button>
+									</div>
+                                </div>
+                            
+                            </div>
+                        
+    
+                          
+                        </form>
+                    </div>
+                </div>
+            </div>
+    
+    
+       
+    
+        </div>
+
+            
+            
+        </main>
+		<!-- MAIN -->
+	</section>
+    
+    
+    
+    
+   
+</body>
+
+<!-- 
+<script>
+
+let subc=new Array()
+
+function addsubCat(){
+	let elemnts=document.getElementById('sub-category').value
+	subc.push(elemnts)
+
+	document.getElementById('sub-category').value=null
+}
+
+function getsubCar(){}
+
+
+</script> -->
+
+
+
+
+<%- include('footer') %>

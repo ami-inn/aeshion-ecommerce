@@ -1,0 +1,275 @@
+<%- include('adminheader') %>
+
+
+<style>
+    img{
+        width: 100px;
+    }
+</style>
+
+<body>
+
+    <section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">Aeshion</span>
+		</a>
+		<ul class="side-menu top">
+			<li >
+				<a href="/admin/">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li class="active">
+				<a href="#">
+					<i class='bx bxs-shopping-bag-alt' ></i>
+					<span class="text">Product Management</span>
+				</a>
+			</li>
+			<li>
+				<a href="contacts.html">
+					<i class='bx bxs-doughnut-chart' ></i>
+					<span class="text">Order Management</span>
+				</a>
+			</li>
+			<li >
+				<a href="#">
+					<i class='bx bxs-message-dots' ></i>
+					<span class="text">Category Management</span>
+				</a>
+			</li>
+			<li >
+				<a href="#">
+					<i class='bx bxs-group' ></i>
+					<span class="text">User Management</span>
+				</a>
+			</li>
+
+            <li>
+				<a href="#">
+					<i class='bx bxs-cog' ></i>
+					<span class="text">Banner Management</span>
+				</a>
+			</li>
+
+            <li>
+				<a href="#">
+					<i class='bx bxs-cog' ></i>
+					<span class="text">Coupun Management</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			
+			<li>
+				<a href="#" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+    
+    
+    
+        <div class=" p-t-130 p-b-100 font-poppins">
+    
+        
+                
+                     
+                <div class="wrapper wrapper--w680">
+                    <div class="card card-4">
+                    <div class="card-body">
+                        <h2 class="title">edit Product</h2>
+                        
+                        
+                        <form id="editProductForm"  action="/admin/edit-product" method="post" enctype="multipart/form-data">
+                            <div class="row row-space">
+                                <input type="text" name="_id" value="<%=product._id%>" style="height: 0px; visibility: hidden;">
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">Product name</label>
+                                        <input class="input--style-4" type="text" value="<%=product.name %>"  name="name">
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label for="Category">Category</label>
+                                        <!-- <input type="text" name="category" placeholder="Category"> -->
+                                        <select class="input--style-4" name="category" placeholder="category" value="<%=product.category %>"  required>
+                                            <% categories.forEach(item=>{ %> 
+                                                <option value="<%=item.category  %>"><%= item.category  %></option>
+                                            <% }) %> 
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row-space">
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">quantity</label>
+                                            <input class="input--style-4 js-datepicker" type="number" min="0" name="quantity" value="<%=product.quantity %>" >
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">Price</label>
+                                        <input class="input--style-4" type="number" name="price" value="<%=product.price %>" >
+                                    </div>
+                                </div>
+
+                           
+
+                            </div>
+
+                            <div class="row row-space">
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">Brand</label>
+                                            <input class="input--style-4 js-datepicker" value="<%=product.brand %>" type="text" name="brand">
+                                    </div>
+                                </div>
+                             
+
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">Mrp</label>
+                                        <input class="input--style-4" value="<%=product.mrp %>" type="number" name="mrp">
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row row-space">
+                                
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">Main-Img : </label>
+                                        <input class="input--style-4" type="file" name="image"id="sImg" accept="image/*" onchange="changeSingleImage()">
+                                        
+                                        <div id="singleImage">
+
+                                            <img src="http://localhost:3000/product-images/<%=product.mainImage.filename %>" alt="" style="width: 100px;" />
+                                            
+                                        </div>
+                                    
+                                
+                                </div>
+                                </div>
+                                <div class="col-2">
+                                    
+                                    
+                                    <!-- side image add -->
+                                    <div class="input-group">
+                                        <label class="label">Other-Img</label>
+                                        <input class="input--style-4" type="file" name="images" accept="image/*" multiple >
+                                        <% product.sideImages.forEach(item => { %>
+                                            <div id="multiImage">
+                                                <img src="http://localhost:3000/product-images/<%=item.filename %>" style="width: 100px;" alt="" />
+                                            </div>
+                                            <% }) %>
+
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row row-space">
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">Description</label>
+                                        <textarea class="input--style-4" name="description" rows="4" form="addProductForm" placeholder="Description" value="<%=product.description %>" ></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    
+                                    <!-- side image add -->
+    
+                                </div>
+                            </div>
+    
+                            <div class="p-t-15">
+                                <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    
+    
+       
+    
+        </div>
+
+
+
+        <script>
+            function changeSingleImage() {
+              const file = document.getElementById("sImg").files[0];
+              var binaryData = [];
+              binaryData.push(file);
+              var imageData = window.URL.createObjectURL(
+                new Blob(binaryData, {
+                  type: "application/zip"
+                })
+              );
+              console.log(imageData);
+              document.getElementById("singleImage").innerHTML= `<img src="${imageData}" />`
+            }
+          
+            function changeMultiImage() {
+              const files = document.getElementById("mImg").files;
+              const multiImage=document.getElementById("multiImage");
+              multiImage.innerHTML=""
+              Array.from(files).forEach((file) => {
+                var binaryData = [];
+                binaryData.push(file);
+                var imageData = window.URL.createObjectURL(
+                  new Blob(binaryData, {
+                    type: "application/zip"
+                  })
+                );
+                console.log(imageData);
+                var img=document.createElement('img')
+                img.src=imageData;
+                multiImage.appendChild(img)
+              });
+            }
+          </script>
+    
+    
+    
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%- include('footer') %>

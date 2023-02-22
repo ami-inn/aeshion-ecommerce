@@ -1,0 +1,133 @@
+.order-table th, .order-table td{
+    padding: 5px;
+    text-align: left;
+    padding-left: 20px;
+}
+
+table input{
+    outline: none;
+    background: none !important;
+    padding: 5px;
+    border: none;
+}
+.thead{
+    padding: 20px;
+}
+.report-btns{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+/* .report-btns button{
+    width: 150px;
+    height: 40px;
+    border: none;
+    outline: none;
+    background-color: var(--black);
+    color: white;
+} */
+.filter-head{
+    display: flex;
+    align-items: center;
+}
+.filter-head input{
+    border: none;
+    outline: none;
+    background-color: #fff;
+    height: 40px;
+    padding: 10px;
+    border: 1px solid rgb(222, 222, 222);
+    margin: 5px;
+    margin-top: -10px;
+}
+
+.order-container h3{
+    color: rgb(26, 26, 26);
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.order-container h6{
+    color: rgb(105, 105, 105);
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+
+
+/* .order-container .filter-box a{
+    background-color:rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    transition: 0.5s ease-in;
+    border: 1px solid black;
+} */
+
+.custom-btn {
+    width: 130px;
+    height: 40px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+     box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+     7px 7px 20px 0px rgba(0,0,0,.1),
+     4px 4px 5px 0px rgba(0,0,0,.1);
+    outline: none;
+  }
+
+
+  .btn-15 {
+    background: #000000;
+    border: none;
+    z-index: 1;
+  }
+  .btn-15:after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 100%;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    background-color: #ebebeb;
+    border-radius: 5px;
+     box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+     7px 7px 20px 0px rgba(0,0,0,.1),
+     4px 4px 5px 0px rgba(0,0,0,.1);
+    transition: all 0.3s ease;
+  }
+  .btn-15:hover {
+    color: rgb(0, 0, 0);
+  }
+  .btn-15:hover:after {
+    left: 0;
+    width: 100%;
+  }
+  .btn-15:active {
+    top: 2px;
+  }
+  
+  .btn-1 {
+    background: rgb(6,14,131);
+    background: linear-gradient(0deg, rgba(6,14,131,1) 0%, rgba(12,25,180,1) 100%);
+    border: none;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 3px;
+  }
+  .btn-1:hover {
+     background: rgb(0,3,255);
+  background: linear-gradient(0deg, rgba(0,3,255,1) 0%, rgba(2,126,251,1) 100%);
+  }
+
+
+.report-btns .download-btn button{
+    
+    background-color: red;
+}

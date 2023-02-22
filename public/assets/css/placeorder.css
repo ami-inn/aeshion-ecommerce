@@ -1,0 +1,102 @@
+.order-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30pc;
+	background-color: #fefefe;
+    box-shadow: inset -5px -5px 12px #ffffff,5px 5px 12px rgba(0,0,0,.16);
+    border: none;
+    border-radius: 5%; 
+    font-size: 16px;
+    cursor: pointer;
+	padding: 15px;
+    margin-top: 50px;
+}
+
+.order-box{
+    padding: 20px;
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-box h2{
+    font-family: 'Passion One', cursive;
+    font-size: 25px;
+}
+.order-box ion-icon{
+    color: rgb(55, 175, 117);
+    font-size: 5pc;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.order-box h4{
+    text-transform: capitalize;
+    font-size: 15px;
+}
+.order-box p{
+    font-size: 11px;
+    font-weight: 200;
+}
+.order-box .order-button{
+    background-color:rgb(250, 245, 245);
+    box-shadow: inset -5px -5px 12px #ffffff,inset 5px 5px 12px rgba(0,0,0,.16);
+    border: none;
+    border-radius: 30px;
+    color: rgb(70, 70, 70);
+    padding: 10px;
+    cursor: pointer;
+}
+
+.custom-btn {
+    padding: 5px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+     box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+     7px 7px 20px 0px rgba(0,0,0,.1),
+     4px 4px 5px 0px rgba(0,0,0,.1);
+    outline: none;
+  }
+
+  .btn-16 {
+    border: none;
+    color: rgb(107, 107, 107);
+  }
+  .btn-16:after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 100%;
+    top: 0;
+    left: 0;
+    direction: rtl;
+    z-index: -1;
+    box-shadow:
+     -7px -7px 20px 0px #fff9,
+     -4px -4px 5px 0px #fff9,
+     7px 7px 20px 0px #0002,
+     4px 4px 5px 0px #0001;
+    transition: all 0.3s ease;
+  }
+  .btn-16:hover {
+    color: #000;
+  }
+  .btn-16:hover:after {
+    left: auto;
+    right: 0;
+    width: 100%;
+  }
+  .btn-16:active {
+    top: 2px;
+  }
+
+

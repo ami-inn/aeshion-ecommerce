@@ -1,0 +1,33 @@
+.order-box{
+    width: 100%;
+    background-color: violet;
+    display: flex;
+    gap: 20px;
+
+    
+}
+
+.order-box .image-box{
+    padding: 15px;
+}
+
+.order-box .image-box img{
+    width: 90px;
+}
+
+.order-box .order-details{
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.order-box .price-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}

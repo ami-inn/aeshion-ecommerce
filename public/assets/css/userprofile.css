@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap");
+
+
+.shadow {
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+.profile-tab-nav {
+	min-width: 250px;
+}
+
+.tab-content {
+	flex: 1;
+}
+
+.form-group {
+	margin-bottom: 1.5rem;
+}
+
+.nav-pills a.nav-link {
+	padding: 15px 20px;
+	border-bottom: 1px solid #ddd;
+	border-radius: 0;
+	color: #333;
+}
+.nav-pills a.nav-link i {
+	width: 20px;
+}
+
+.img-circle img {
+	height: 100px;
+	width: 100px;
+	border-radius: 100%;
+	border: 5px solid #fff;
+}
+.img-circle ion-icon{
+	font-size: 5pc;
+	font-weight: 800;
+}
+
+.address-box{
+	
+	padding: 15px ;
+	border-radius: 5px;
+	margin-bottom: 8px;
+}
+.manage-address{
+	display: flex;
+	flex-direction: column;
+	background-color:rgb(249, 249, 249);
+box-shadow: inset -5px -5px 12px #ffffff,inset 5px 5px 12px rgba(0,0,0,.16);
+border: none;
+border-radius: 10px;
+color: rgb(70, 70, 70);
+
+margin: auto;
+padding: 20px;
+
+	
+}
+.address-form{
+	margin-bottom: 20px;
+}
+
+
+
+.manage-address h5{
+	font-size: 15px;
+	text-transform: capitalize;
+	font-weight: bold;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.manage-address .edit-btn{
+	background-color: rgb(143, 222, 188);
+	 color: white; padding: 8px 31px; 
+	 font-size: 12px; font-weight: 00;
+}
+.manage-address .delete-btn{
+	background-color: rgb(210, 104, 104);
+	 color: white; padding: 8px 20px; 
+	 font-size: 12px; font-weight: 500;
+}
+.button-box{
+	display: flex;
+	gap: 8px;
+}
+
+.profile-tab-nav h4{
+	font-size: 18px;
+	font-weight: bold;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+.linksf{
+	color: blue;
+}
+.fa-user{
+	color: rgb(69, 125, 160);
+}
+
+.coupon-box{
+
+	width: 15pc;
+	background-color: #fefefe;
+    box-shadow: inset -5px -5px 12px #ffffff,5px 5px 12px rgba(0,0,0,.16);
+    border: none;
+    border-radius: 5%;
+    margin: 8px;
+    font-size: 16px;
+    cursor: pointer;
+	padding: 12px;
+}
+
+.couponHead{
+	font-size: 18px;
+	font-weight: bold;
+	text-transform: capitalize;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.coupon-logo{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+}
+
+.coupon-logo ion-icon{
+	font-size: 25px;
+	font-weight: bold;
+	
+	color: rgb(0, 98, 203);
+}
+
+.wallet-box{
+	background-color: #ecf0f3;
+    box-shadow: inset -5px -5px 12px #ffffff,5px 5px 12px rgba(0,0,0,.16);
+    border: none;
+
+    font-size: 16px;
+}
