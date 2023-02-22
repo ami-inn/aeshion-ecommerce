@@ -175,7 +175,7 @@ module.exports = {
 
         await sendOtp(req.body.email,otp)
 
-        req.session.tempUser={
+        req.session.tempuser={
             email,otp
         }
 
@@ -184,17 +184,46 @@ module.exports = {
     },
 
     forgotPassVerify:(req,res)=>{
-        res.render('forgotPasswordVerify',{email:req.session.tempUser.email})
+        res.render('forgotPasswordVerify',{email:req.session.tempuser.email})
 
     },
     forgotPasswordVerify:async(req,res)=>{
         const {otp}=req.body
 
-        if(req.session.tempUser.otp==otp){
-            return res.render('changePassword')
+        if(req.session.tempuser.otp==otp){
+            return res.render('changePassword',{email:req.session.tempuser.email})
         }
 
         return res.render('forgotPassword',{message:'invalid Otp'})
+
+    },
+
+    changePassword:async (req,res)=>{
+
+        try{
+            const {password,confpassword}=req.body
+
+            if(password==confpassword){
+                await userModel.findOneAndUpdate({email:req.session.tempuser.email}, {
+                    $set:{
+                        password:password
+                    }
+                })
+    
+                return res.redirect("/login")
+            }
+         console.log('password error')
+            return res.render('changePassword',{message:'password not mathch'})
+        }
+
+        catch (err){
+
+            console.log(err)
+
+        }
+        
+       
+
 
     },
 

@@ -25,7 +25,9 @@ router.get('/logout',controller.userLogout )
 router.get('/forgot-pass-verify',controller.forgotPassVerify)
 router.get('/forgot-Password',controller.forgotPassword)
 router.post('/forgot-password-email',controller.forgotPasswordEmail)
-router.post('/forgot-password-verify',)
+router.post('/forgot-password-verify',controller.forgotPasswordVerify)
+router.post('/change-password',controller.changePassword)
+
 
 
 
