@@ -265,6 +265,18 @@ module.exports = {
 
         try{
 
+            let cartcount
+      
+            if(req.session.user){
+                const _id=req.session.user.id
+                const user=await userModel.findOne({_id})
+                cartcount=user.cart.length
+            }
+          
+
+
+
+
 
             const product=await productModel.find({status:'available'}).lean()
 
@@ -272,10 +284,10 @@ module.exports = {
     
             const prdctCount=await productModel.find().lean().countDocuments()
     
-            console.log(prdctCount)
+           
     
     
-            res.render('userShop1',{product,prdctCount,categories})
+            res.render('userShop1',{product,prdctCount,categories,cartcount})
     
         }
 
@@ -334,19 +346,25 @@ module.exports = {
     getuserProduct:async (req,res)=>{
 
         const _id=req.params.id
-        console.log(_id)
+     
 
         const product= await productModel.findById(_id).lean()
     
-        console.log(product)
+   
 
         const products=await productModel.find().limit(5).lean()
+
+        let cartcount
 
         if(req.session.user){
             const id=req.session.user.id
             console.log(id)
 
             const user=await userModel.findById({_id:id}).lean()
+
+            cartcount=user.cart.length
+
+       
 
        
             
@@ -355,13 +373,13 @@ module.exports = {
     
 
             if(user.wishlist.includes(_id)){
-                res.render('single-product',{product,products,wish:true})
+                res.render('single-product',{product,products,wish:true,cartcount})
            
             }else{
-                res.render('single-product',{product,products,wish:false})
+                res.render('single-product',{product,products,wish:false,cartcount})
             }
         }else{
-            res.render('single-product',{product,products,wish:false})
+            res.render('single-product',{product,products,wish:false,cartcount})
         }
        
 
@@ -1048,7 +1066,7 @@ module.exports = {
         await userModel.updateOne({_id}, {$addToSet:{
             wishlist:proId
         }})
-        res.redirect('back')
+        res.json({success:true})
 
     },
 
@@ -1060,7 +1078,7 @@ module.exports = {
             wishlist:id
         }})
 
-        res.redirect('back')
+        res.json({success:true})
 
     },
     

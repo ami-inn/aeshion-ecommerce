@@ -134,7 +134,13 @@
                         <div class="site-cart">
                             <a href="#;" class="site-header__cart" title="Cart">
                                 <i class="icon anm anm-bag-l"></i>
-                                <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count">2</span>
+                                <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count"> 
+                                    <% if(typeof cartcount !== 'undefined'){ %>
+                                        <%= cartcount  %>
+                                        <% }else{ %>
+                                            0
+                                            <% } %>
+                                    </span>
                             </a>
                             <!--Minicart Popup-->
                             <div id="header-cart" class="block block-cart">
@@ -557,19 +563,19 @@
 
 
                                     <div class="display-table shareRow">
-                                            <div class="display-table-cell medium-up--one-third">
+                                            <div class="display-table-cell medium-up--one-third" id="wishlist">
                                                
                                                 <% if(wish){ %> 
                                                
                                                 <div class="wishlist-btn">
-                                                    <a class="wishlist add-to-wishlist" style=" font-weight: bold ;"  href="/remove-wishlist/<%= product._id %> " title="Add to Wishlist">  <ion-icon name="heart" style="font-size: 18px; font-weight: bolder; color: red;"></ion-icon> <span>Add to Wishlist</span></a>
-                                                    <!-- <span class="wishlist add-to-wishlist"  style=" font-weight: bold ;" onclick="removeWish('<%= product._id  %>')" title="Add to Wishlist"> <ion-icon name="heart" style="font-size: 18px; font-weight: bolder; color: red;"></ion-icon> remove to Wishlist</span>  -->
+                                                    <i class="wishlist add-to-wishlist" style=" font-weight: bold ;"  onclick="removeWish()"  title="Add to Wishlist">  <ion-icon name="heart" style="font-size: 18px; font-weight: bolder; color: red;"></ion-icon> <span>Remove from Wishlist</span></i>
+
                                                 </div>
                                            <% }else{ %>
                                            
                                             <div class="wishlist-btn">
-                                                <a class="wishlist add-to-wishlist" style=" font-weight: bold ;"  href="/addto-wishlist/<%= product._id %> " title="Add to Wishlist"> <ion-icon name="heart-outline" style="font-size: 18px; font-weight: bolder;"></ion-icon> <span>Add to Wishlist</span></a>
-                                                <!-- <span class="wishlist add-to-wishlist"  style=" font-weight: bold ;" onclick="addtoWish('<%= product._id  %>')" title="Add to Wishlist"><ion-icon name="heart-outline" style="font-size: 18px; font-weight: bolder;"></ion-icon> Add to Wishlist</span>  -->
+                                                <i class="wishlist add-to-wishlist" style=" font-weight: bold ;"  onclick="addtoWish()"  title="Add to Wishlist"> <ion-icon name="heart-outline" style="font-size: 18px; font-weight: bolder;"></ion-icon> <span>Add to Wishlist</span></i>
+
                                             </div>
 
                                             <% } %>
@@ -1128,6 +1134,8 @@
 
      <script>
 
+        let productId='<%=product._id %>'
+
      function addtoCart(proId){
         window.alert('are you sure')
         axios.get('/addto-cart/'+proId).then((response)=>{
@@ -1139,20 +1147,26 @@
         })
     }
 
-    function addtoWish(proId){
-        axios.get('/addto-wishlist/'+proId).then((response)=>{
-            console.log('response = '+response)
-        }).catch((err)=>{
-            console.log('eroorr'+err)
-        })
+    async function addtoWish(){
+
+        let response=await axios.get('/addto-wishlist/'+productId)
+
+        if(!response.data.success){
+      window.location.href="/login"
+    }else{
+      wishlist.innerHTML=`<i class="wishlist add-to-wishlist" onclick="removeWish()" style=" font-weight: bold ;"   title="Add to Wishlist">  <ion-icon name="heart" style="font-size: 18px; font-weight: bolder; color: red;"></ion-icon> <span>remove from Wishlist</span></i>`
+    }
+    
     }
 
-    function removeWish(proId){
-        axios.get('/remove-wishlist/'+proId).then((response)=>{
-            console.log('response = '+response)
-        }).catch((err)=>{
-            console.log('eroorr'+err)
-        })
+    async function removeWish(proId){
+
+        if(confirm('Are you sure remove this item from wishlist ?')) {           
+        let response=await axios.get('/remove-wishlist/'+productId)
+        }
+
+        wishlist.innerHTML=`      <i class="wishlist add-to-wishlist" style=" font-weight: bold ;"  onclick="addtoWish()"  title="Add to Wishlist"> <ion-icon name="heart-outline" style="font-size: 18px; font-weight: bolder;"></ion-icon> <span>Add to Wishlist</span></i>`
+        let response=await axios.get('/remove-wishlist/'+productId)
     }
 
      </script>
