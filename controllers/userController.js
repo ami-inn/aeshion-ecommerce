@@ -803,6 +803,20 @@ module.exports = {
         
         if(payment != 'cod'){
 
+            if(walletUse){
+                req.session.wallet={
+                    amount:walletUse
+                }
+            }
+
+            if(couponcode){
+                req.session.coupon={
+                    code:couponcode
+                }
+            }
+
+            console.log(req.session.coupon.code)
+
             let orderId = "order_" + createId();
         const options = {
         method: "POST",
@@ -952,6 +966,7 @@ module.exports = {
                 const user=await userModel.findOne({_id}).lean()
 
                 const cart = user.cart
+                let wallet=user.wallet
                 let cartQuantities = {};
         
                
@@ -992,6 +1007,28 @@ module.exports = {
                 let i=0
                 let cartLength=user.cart.length
 
+
+                if(req.session.wallet){
+
+                    let walletAmount=req.session.wallet.amount
+
+                    wallet=wallet-walletAmount
+        
+                   price=price-walletAmount
+        
+                    if(price<0){
+                        wallet=wallet-totalPrice
+                        price=0
+                    }
+                    await userModel.updateOne({_id},{
+                        $set:{
+                            wallet:wallet
+                        }
+                    })
+        
+                }
+
+
                 for(let item of product) {
 
                     await productModel.updateOne(
@@ -1004,10 +1041,29 @@ module.exports = {
                         );
                         
                         totalPrice=( cart[i].quantity * item.price)
+
+                                  
+            if(req.session.coupon){
+                
+                const couponcode=req.session.coupon.code
+
+
+                const coupon = await couponModel.findOne({code:couponcode})
+
+                console.log(coupon)
+
+                totalPrice=totalPrice-(coupon.cashback / cartLength).toFixed(2)
+            }
+
+            console.log(totalPrice)
+
+            if(req.session.wallet){
+                totalPrice=totalPrice-(req.session.wallet.amount/cartLength).toFixed(2)
+            }
+
+             totalPrice  < 0 ? totalPrice=0 : totalPrice;
                         
-                    // if(coupon){
-                    //     totalPrice=totalPrice-(coupon.cashback / cartLength)
-                    // }
+                  
                   
                     orders.push({
                         address:newAddress.address[0],
