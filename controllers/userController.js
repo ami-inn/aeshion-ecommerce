@@ -261,44 +261,82 @@ module.exports = {
     // SHOP
 
 
-    getuserShop:async (req,res)=>{
+    // getuserShop:async (req,res)=>{
 
-        try{
+    //     try{
 
-            let cartcount
+    //         let cartcount
       
-            if(req.session.user){
-                const _id=req.session.user.id
-                const user=await userModel.findOne({_id})
-                cartcount=user.cart.length
-            }
+    //         if(req.session.user){
+    //             const _id=req.session.user.id
+    //             const user=await userModel.findOne({_id})
+    //             cartcount=user.cart.length
+    //         }
           
 
 
 
 
 
-            const product=await productModel.find({status:'available'}).lean()
+    //         const product=await productModel.find({status:'available'}).lean()
 
-            const categories = await categoryModel.find().lean()
+    //         const categories = await categoryModel.find().lean()
     
-            const prdctCount=await productModel.find().lean().countDocuments()
+    //         const prdctCount=await productModel.find().lean().countDocuments()
     
            
     
     
-            res.render('userShop1',{product,prdctCount,categories,cartcount})
+    //         res.render('userShop1',{product,prdctCount,categories,cartcount})
     
-        }
+    //     }
 
-        catch(err){
-            console.log(err)
-            return res.send('404error')
-        }
+    //     catch(err){
+    //         console.log(err)
+    //         return res.send('404error')
+    //     }
 
-    },
+    // },
 
     //not complete
+
+
+    getuserShop:async(req,res)=>{
+
+        const category = req.query.category ?? "";
+        const filter = req.query.filter ?? 0;
+        const key=req.query.key ?? ""//req.qery il key varunnenkil keyile value save aavum
+      
+        let count = 0;
+        
+     
+        let products=await productModel.find({status:'available'}).lean()
+
+        
+
+        if (filter == 0) {
+          products = await productModel
+            .find({
+              name: new RegExp(key, "i"),
+              category: new RegExp(category, "i")
+            })
+            .sort({ uploadedAt: -1 }).lean();
+          count = products.length;
+        } else {
+          products = await productModel
+            .find({
+              name: new RegExp(key, "i"),
+              category: new RegExp(category, "i")
+            })
+            .sort({ price: filter }).lean();
+            count = products.length;
+        }
+
+        console.log(products)
+       
+        const categories=await categoryModel.find().lean()
+       return res.render('userShop1',{products, key, filter, categories, category})
+    },
 
     getproductList: async (req,res)=>{
         const category = req.query.category ?? ''
@@ -346,6 +384,8 @@ module.exports = {
     getuserProduct:async (req,res)=>{
 
         const _id=req.params.id
+
+      
      
 
         const product= await productModel.findById(_id).lean()
@@ -354,32 +394,52 @@ module.exports = {
 
         const products=await productModel.find().limit(5).lean()
 
+        
+
         let cartcount
 
         if(req.session.user){
             const id=req.session.user.id
-            console.log(id)
+             let cartInclude
 
             const user=await userModel.findById({_id:id}).lean()
+
+            let cart=user.cart
+            const cartList=cart.map(item=>{
+                return item.id
+            })
+
+            if(cartList.includes(_id)){
+              cartInclude=true
+            }else{
+                cartInclude=false
+            }
+
+           
+
+        
+
 
             cartcount=user.cart.length
 
        
-
-       
-            
-
-            // user.cart.includes(_id) ? res.render('single-product',{product,products,cart:true}): res.render('single-product',{product,products,cart:false});
+    
     
 
             if(user.wishlist.includes(_id)){
-                res.render('single-product',{product,products,wish:true,cartcount})
+
+                return res.render('single-product',{product,products,wish:true,cartcount,cartInclude})
            
             }else{
-                res.render('single-product',{product,products,wish:false,cartcount})
+               return res.render('single-product',{product,products,wish:false,cartcount,cartInclude})
             }
+
+
+       
+
+
         }else{
-            res.render('single-product',{product,products,wish:false,cartcount})
+            res.render('single-product',{product,products,wish:false,cartcount,cart,cartInclude})
         }
        
 
@@ -917,13 +977,25 @@ module.exports = {
                 })
                 
 
-            }else{
+            }if(coupon){
                 orders.push({
                     address:address[0],
                     product:item,
                     userId:req.session.user.id,
                     quantity:cart[i].quantity,
                     total:totalPrice+50,
+                    coupon:{applied:true,price:coupon.cashback,coupon:coupon}
+                })
+            }
+            
+            else{
+                orders.push({
+                    address:address[0],
+                    product:item,
+                    userId:req.session.user.id,
+                    quantity:cart[i].quantity,
+                    total:totalPrice+50,
+                    
                 })
             }
           

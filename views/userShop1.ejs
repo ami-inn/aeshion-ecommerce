@@ -441,17 +441,15 @@
 
                                 <div class="widget-title"><h2>Brands</h2></div>
                                 <ul>
-                                    <% product.forEach(item =>{ %> 
+                                   
                                     <li>
 
 
-                                      <input type="checkbox" value="<%= item.brand %> " id="check1">
-                                      <label for="check1"><span><span></span></span><%= item.brand %> </label>
                                     </li>
 
 
 
-                                    <% }) %> 
+                            
                                 </ul>
 
                                 <button type="submit" class="btn btn-secondary btn--small">Submit</button>
@@ -531,16 +529,18 @@
                             <!--Toolbar-->
                             <button type="button" class="btn btn-filter d-block d-md-none d-lg-none"> Product Filters</button>
                             <div class="toolbar">
-                                <div class="filters-toolbar-wrapper">
+
+
+                                <form action="/shop" method="get" class="filters-toolbar-wrapper">
                                     <div class="row">
                                         <div class="col-3 col-md-3 col-lg-3 filters-toolbar__item collection-view-as d-flex justify-content-start align-items-center">
  
-                                            <form  class="search-form" role="search" method="post" action="/search-product">
+                                            <div  class="search-form" role="search">
                                                 <div class="form-input">
-                                                    <input type="search" placeholder="Search Users" name="name">
+                                                    <input type="search" placeholder="Search Users" name="key" value="<%= key %>">
                                                     <button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
                                                 </div>
-                                            </form>
+                                            </div>
 
 
                                         </div>
@@ -558,23 +558,25 @@
                                         <div class="col-3 col-md-3 col-lg-3 text-right">
                                             <div class="filters-toolbar__item">
 
-                                                <form action="/sort-product" method="get">
+
+                                                <div>
 
                                               
 
                                                   <label for="SortBy" class="hidden">Sort</label>
 
-                                                  <select  name="SortBy" id="SortBy" class="filters-toolbar__input filters-toolbar__input--sort">
-                                                    <option value="title-ascending" selected="selected">Sort</option>
+                                                  <select  name="filter" id="SortBy" onchange="this.form.submit()" class="filters-toolbar__input filters-toolbar__input--sort">
+                                                    <option value="0" <% if(filter==0){ %>selected<% } %>>Sort</option>
                                                 
-                                                    <option value="low-high">Price, low to high</option>
-                                                    <option value="high-low">Price, high to low</option>
+                                                    <option value="1" <% if(filter==1){ %>selected<% } %>>Price, low to high</option>
+                                                    <option value="-1" <% if(filter==-1){ %>selected<% } %>>Price, high to low</option>
                                                    
                                                   </select>
 
-                                                  <button type="submit" class="btn btn-secondary btn--small">Sort</button>
 
-                                                </form>
+                                                </div>
+
+
 
                                                   <input class="collection-header__default-sort" type="hidden" value="manual">
                                             </div>
@@ -583,28 +585,30 @@
                                         <div class="col-3 col-md-3 col-lg-3 text-right">
                                             <div class="filters-toolbar__item">
 
-                                                <form action="/filter-product" method="get">
+                                                <div>
                                                   <label for="SortBy" class="hidden">Sort</label>
 
-                                                  <select  name="filterBy" id="SortBy" class="filters-toolbar__input filters-toolbar__input--sort">
-                                                    <option value="title-ascending" selected="selected">filter</option>
+                                                  <select  name="category"  id="SortBy" onchange="this.form.submit()" class="filters-toolbar__input filters-toolbar__input--sort">
+                                                    <option value="" selected="selected">filter</option>
                                                     <% if (typeof categories !== "undefined") { %>
                                                      
                                                         <% categories.forEach(item=>{ %> 
 
-                                                            <option value="<%= item.category %>"><%= item.category %></option>
+                                                            <option value="<%= item.category %>" <% if(category==item.category){ %>selected <% } %>>
+                                                                <%= item.category %>
+                                                            </option>
     
                                                             <% }) %> 
 
                                                     <% } %>
                                                                                                       
                                                   </select>
+                                                  <!-- <button type="submit" class="btn btn-secondary btn--small">Filter</button> -->
 
-                                                  <button type="submit" class="btn btn-secondary btn--small">Filter</button>
 
-                                                </form>
 
-                                                  <input class="collection-header__default-sort" type="hidden" value="manual">
+                                                </div>
+
                                             </div>
                                         </div>
                                       
@@ -612,7 +616,11 @@
                                      
     
                                     </div>
-                                </div>
+                                </form>
+
+
+
+
                             </div>
                             <!--End Toolbar-->
 
@@ -625,7 +633,7 @@
 
                                 <div class="row">
 
-                                    <% product.forEach(item=>{ %>
+                                    <% products.forEach(item=>{ %>
 
                                     <div class="col-6 col-sm-6 col-md-4 col-lg-3 item">
                                         <!-- start product image -->

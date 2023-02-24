@@ -2,6 +2,7 @@ const express = require('express')
 const connectDB=require('./config/dbConnect')
 const session=require('express-session')
 const catcheControl=require('./middlewares/cache-control')
+const MongoStore = require('connect-mongo');
 
 const userRouter=require('./routes/userRouter')
 const adminRouter=require('./routes/adminRouter')
@@ -16,6 +17,7 @@ connectDB()
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(session({
+    store: MongoStore.create({ mongoUrl: process.env.DB_CONFIG }),
     secret:'secret',
     saveUninitialized:true,
     resave:false

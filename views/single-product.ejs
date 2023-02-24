@@ -541,11 +541,23 @@
                                        
                                           
 
-                                                    <div class="product-form__item--submit" style="margin-bottom: 5px;">
+                                                    <div class="product-form__item--submit" style="margin-bottom: 5px;" id="cartInclude">
                                                         <!-- <a href="/addto-cart/<%= product._id  %> "> -->
-                                                        <button type="button" onclick="addtoCart('<%=product._id%>')" name="add" class="btn product-form__cart-submit">
-                                                            <span>Add to cart</span>
+
+                                                            <% if(cartInclude){ %> 
+
+                                                        <button type="button" onclick="location.href='/cart'" name="add" class="btn product-form__cart-submit">
+                                                            <span>go to cart</span>
                                                         </button>
+
+                                                        <% }else{ %>
+
+                                                            <button type="button" onclick="addtoCart('<%=product._id%>')" name="add" class="btn product-form__cart-submit">
+                                                                <span>add to cart</span>
+                                                            </button>
+
+                                                            <% } %>
+
                                                     <!-- </a> -->
                                                     </div>
 
@@ -1137,10 +1149,11 @@
         let productId='<%=product._id %>'
 
      function addtoCart(proId){
-        window.alert('are you sure')
+       
         axios.get('/addto-cart/'+proId).then((response)=>{
-            console.log('first')
-            console.log(response)
+            cartInclude.innerHTML=`<button type="button" onclick="location.href='/cart'" name="add" class="btn product-form__cart-submit"><span>go to cart</span></button> `
+
+
         }).catch((err)=>{
             console.log('second')
             console.log(err)
