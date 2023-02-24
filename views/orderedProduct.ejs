@@ -519,6 +519,7 @@
                             	<div class="product-info">
                                   <p class="product-type"><span class="lbl">Product Type:</span> <a href="#" title="Women's"><%= order.product.category  %></a></p>
                                   <p class="product-cat"> <span class="lbl">Quantity: </span><a href="#" title=""><%= order.quantity %></a> </p>
+                                  <p class="product-cat"> <span class="lbl">OrderId: </span><a href="#" title="" style="color: rgb(230, 110, 110); font-weight: bold;"><%= order._id %></a> </p>
 
                                   <% if(order.orderStatus == 'pending'){ %>
                                     <p class="product-cat"> <span class="lbl">Delivery Expected: </span><a href="#" title="" style="font-weight: bold; color: rgb(1, 158, 142);"><%=order.dispatch.toLocaleDateString() %></a> </p>

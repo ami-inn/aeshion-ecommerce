@@ -552,7 +552,7 @@
 
                                                         <% }else{ %>
 
-                                                            <button type="button" onclick="addtoCart('<%=product._id%>')" name="add" class="btn product-form__cart-submit">
+                                                            <button type="button" onclick="addtoCart()" name="add" class="btn product-form__cart-submit">
                                                                 <span>add to cart</span>
                                                             </button>
 
@@ -1148,15 +1148,17 @@
 
         let productId='<%=product._id %>'
 
-     function addtoCart(proId){
+     function addtoCart(){
        
-        axios.get('/addto-cart/'+proId).then((response)=>{
-            cartInclude.innerHTML=`<button type="button" onclick="location.href='/cart'" name="add" class="btn product-form__cart-submit"><span>go to cart</span></button> `
+        axios.get('/addto-cart/'+productId).then((response)=>{
+            cartInclude.innerHTML=`<button type="button" onclick="location.href='/cart'" name="add" class="btn product-form__cart-submit">
+                                                    <span>go to cart</span>
+                                                        </button> `
 
 
         }).catch((err)=>{
             console.log('second')
-            console.log(err)
+            location.href="/login"
         })
     }
 

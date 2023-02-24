@@ -397,10 +397,11 @@ module.exports = {
         
 
         let cartcount
+        let cartInclude
 
         if(req.session.user){
             const id=req.session.user.id
-             let cartInclude
+           
 
             const user=await userModel.findById({_id:id}).lean()
 
@@ -439,7 +440,7 @@ module.exports = {
 
 
         }else{
-            res.render('single-product',{product,products,wish:false,cartcount,cart,cartInclude})
+            res.render('single-product',{product,products,wish:false,cartcount,cartInclude})
         }
        
 
@@ -458,8 +459,7 @@ module.exports = {
 
             await userModel.updateOne({_id},{$addToSet:{ cart:{id:productId, quantity:1}}})
 
-            res.json({succuss:true})
-            // res.redirect('back')
+            res.json({success:true})
 
     
     },
