@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Mukta:wght@600;800&family=Passion+One&family=Poppins&display=swap" rel="stylesheet">
+	<!-- My CSS -->
+	<link rel="stylesheet" href="/assets/css/admindash.css">
+    <link rel="stylesheet" href="/assets/css/adminlogin.css">
+    <link rel="stylesheet" href="/assets/css/table.css">
+    <link rel="stylesheet" href="/assets/css/form.css">
+    <link rel="stylesheet" href="/assets/css/userManage.css">
+    <link rel="stylesheet" href="/assets/css/salesreport.css">
+    <link rel="shortcut icon" href="/assets/images/favicon.png" />
+<!-- Plugins CSS -->
+<link rel="stylesheet" href="/assets/css/plugins.css">
+<!-- Bootstap CSS -->
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+<!-- Main Style CSS -->
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/responsive.css">
+</head>
+
+
+
+
+
+<body>
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">Aeshion</span>
+		</a>
+		<ul class="side-menu top">
+			<li >
+				<a href="/admin/">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li >
+				<a href="/admin/product-management">
+					<i class='bx bxs-shopping-bag-alt' ></i>
+					<span class="text">Product Management</span>
+				</a>
+			</li>
+			<li class="active">
+				<a href="/admin/order-management">
+					<i class='bx bxs-doughnut-chart' ></i>
+					<span class="text">Order Management</span>
+				</a>
+			</li>
+			<li>
+				<a href="/admin/category">
+					<i class='bx bxs-message-dots' ></i>
+					<span class="text">Category Management</span>
+				</a>
+			</li>
+			<li >
+				<a href="/admin/userManage">
+					<i class='bx bxs-group' ></i>
+					<span class="text">User Management</span>
+				</a>
+			</li>
+
+            <li>
+				<a href="/admin/banner-management">
+					<i class='bx bxs-cog' ></i>
+					<span class="text">Banner Management</span>
+				</a>
+			</li>
+
+            <li>
+				<a href="/admin/coupon-management">
+					<i class='bx bxs-cog' ></i>
+					<span class="text">Coupun Management</span>
+				</a>
+			</li>
+
+			<li>
+				<a href="/admin/sales-report">
+					<i class='bx bxs-shopping-bag-alt' ></i>
+					<span class="text">Sales Report</span>
+				</a>
+			</li>
+
+		</ul>
+		<ul class="side-menu">
+			
+			<li>
+				<a href="#" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section class="content" id="blur">
+	
+        <div id="page-content">
+            <!--MainContent-->
+            <div id="MainContent" class="main-content" role="main">
+                <!--Breadcrumb-->
+                <div class="bredcrumbWrap">
+                    <div class="container breadcrumbs" role="navigation" aria-label="breadcrumbs">
+                        <a href="index.html" title="Back to the home page">Home</a><span aria-hidden="true">›</span><span>Product with Variant Image</span>
+                    </div>
+                </div>
+                <!--End Breadcrumb-->
+                
+                <div id="ProductSection-product-template" class="product-template__container prstyle1 container">
+                    <!--product-single-->
+                    <div class="product-single">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                                <div class="product-details-img" style="width: 400px;">
+                                    <div class="zoompro-wrap product-zoom-right pl-20">
+                                        <div class="zoompro-span">
+                                            <img class="blur-up lazyload zoompro" data-zoom-image="/product-images/<%=order.product.mainImage.filename%>" alt="" src="/product-images/<%=order.product.mainImage.filename%>" />
+                                        </div>
+                                        <div class="product-buttons">
+                                            <a href="https://www.youtube.com/watch?v=93A2jOW5Mog" class="btn popup-video" title="View Video"><i class="icon anm anm-play-r" aria-hidden="true"></i></a>
+                                            <a href="#" class="btn prlightbox" title="Zoom"><i class="icon anm anm-expand-l-arrows" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                   
+        							
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                <div class="product-single__meta">
+                                    <h1 class="product-single__title"><%=order.product.name  %> </h1>
+                                    <div class="product-nav clearfix">					
+                                        <a href="#" class="next" title="Next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                    </div>
+                                    <div class="prInfoRow">
+                                        <div class="product-stock"> <span class="instock "><%= order.product.status  %></span> <span class="outstock hide">Unavailable</span> </div>
+                                        <div class="product-sku">SKU: <span class="variant-sku">19115-rdxs</span></div>
+                                    </div>
+                                    <p class="product-single__price product-single__price-product-template">
+                                        <span class="visually-hidden">Regular price</span>
+                                        <span class="product-price__price product-price__price-product-template">
+                                            <span id="ProductPrice-product-template"><span class="money">₹ <%=order.product.price%></span></span>
+                                        </span>
+                                    </p>
+                                    <div class="product-single__description rte">
+                                        <p><%= order.product.description %></p>
+                                        
+                                    </div>
+                                
+                                 
+                                 
+                               
+                               
+                            	</div>
+                            	<div class="product-info">
+                                  <p class="product-type"><span class="lbl">Product Category :</span> <a href="#" title="Women"><%= order.product.category  %></a></p>
+                                  <p class="product-cat"> <span class="lbl">Quantity : </span><a href="#" title="" style="font-weight: bold;"><%= order.quantity %></a> </p>
+                                  <p class="product-cat"> <span class="lbl">OrderId : </span><a href="#" title="" style="color: rgb(230, 110, 110); font-weight: bold;"><%= order._id %></a> </p>
+                                  
+                                  <p class="product-cat"> <span class="lbl">Payment : </span><a style="font-weight: bold; color: rgb(119, 145, 240); " title="">
+                                    <% if(order.paid){ %> 
+                                        paid
+                                       <% }else { %>                        
+                                        not paid
+                                        <% } %>
+                                  </a> </p>
+
+
+                                  <p class="product-cat"> <span class="lbl"> Coupon Applied : </span><a style="font-weight:bold; color: rgb(119, 145, 240);" title="">
+                                    
+                                    <%=order.coupon.applied ? "applied ": "not applied" %>
+                                    
+                                    </a> </p>
+
+                                 
+
+                                    <% if(order.coupon.applied){ %>
+                                        <p  class="product-cat"> <span class="lbl">Coupon Name : </span><a style="color: rgb(0, 0, 0); font-weight: bold;" title=""><%= order.coupon.coupon.name %></a> </p>   
+                                  <p  class="product-cat"> <span class="lbl">Cash Back : </span><a style="color: rgb(6, 189, 171); font-weight: bold; " title=""><%= order.coupon.coupon.cashback %></a> </p>
+
+                                  <% } %>
+                                  
+
+                                  <p class="product-cat"> <span class="lbl">Payment type: </span><a href="#" title="" style="font-weight: bold;"><%= order.paymentType %></a> </p>
+                                  <p class="product-cat"> <span class="lbl">Amount to pay : </span><a href="#" title="" style="color: rgba(42, 189, 74, 0.912);font-weight: bold;"><%= order.total %></a> </p>
+                                  <p class="product-cat"> <span class="lbl">Order Status : </span><a href="#" title="" style="color: rgba(0, 0, 0, 0.912);font-weight: bold;"><%= order.orderStatus %></a> </p>
+
+                                  <% if(order.orderStatus == 'pending'){ %>
+                                    <p class="product-cat"> <span class="lbl">Delivery Expected: </span><a href="#" title="" style="font-weight: bold; color: rgb(1, 158, 142);"><%=order.dispatch.toLocaleDateString() %></a> </p>
+                                  <% } %>
+
+                                  <% if(order.orderStatus == 'cancelled'){ %>
+                                    <p class="product-cat"> <span class="lbl">Delivery Status: </span><a href="#" title="" style="font-weight: bold; color: rgb(216,77,77);"><%=order.orderStatus%></a> </p>
+                                  <% } %>
+
+                                  <% if(order.orderStatus == 'return-progressing'){ %>
+                                    <p class="product-cat"> <span class="lbl">Return  Status: </span><a href="#" title="" style="font-weight: bold; color: rgba(59, 134, 214, 0.912);"><%=order.orderStatus%></a> </p>
+                                    <p style="font-weight: bold; color: rgb(199, 207, 111);">Return Progressing!</p>
+                                  <% } %>
+
+                                  <% if(order.orderStatus == 'returned'){ %>
+                                    <p class="product-cat"> <span class="lbl">Return  Status: </span><a href="#" title="" style="font-weight: bold; color: rgba(59, 134, 214, 0.912);"><%=order.orderStatus%></a> </p>
+                                    <p class="product-cat"> <a href="/profile" title="" style="font-weight: bold; color: rgba(131, 238, 154, 0.912);">Returned</a> </p>
+                                
+                                  <% } %>
+
+                                </div>
+
+                        	</div>
+                    </div>
+                 
+                  
+                    
+                   
+                    
+                
+                    </div>
+                <!--#ProductSection-product-template-->
+            </div>
+            <!--MainContent-->
+        </div>
+    	<!--End Body Content-->
+    	</div>
+
+	</section>
+	<!-- CONTENT -->
+
+    
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+	<script src="/assets/js/admindash.js"></script>
+	<script src="/assets/js/toggle.js"></script>
+
+    <script src="/assets/js/vendor/jquery-3.3.1.min.js"></script>
+    <script src="/assets/js/vendor/jquery.cookie.js"></script>
+    <script src="/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="/assets/js/vendor/wow.min.js"></script>
+    <!-- Including Javascript -->
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/plugins.js"></script>
+    <script src="/assets/js/popper.min.js"></script>
+    <script src="/assets/js/lazysizes.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <!-- Photoswipe Gallery -->
+    <script src="/assets/js/vendor/photoswipe.min.js"></script>
+    <script src="/assets/js/vendor/photoswipe-ui-default.min.js"></script>
+    <script>
+       $(function(){
+           var $pswp = $('.pswp')[0],
+               image = [],
+               getItems = function() {
+                   var items = [];
+                   $('.lightboximages a').each(function() {
+                       var $href   = $(this).attr('href'),
+                           $size   = $(this).data('size').split('x'),
+                           item = {
+                               src : $href,
+                               w: $size[0],
+                               h: $size[1]
+                           }
+                           items.push(item);
+                   });
+                   return items;
+               }
+           var items = getItems();
+       
+           $.each(items, function(index, value) {
+               image[index]     = new Image();
+               image[index].src = value['src'];
+           });
+           $('.prlightbox').on('click', function (event) {
+               event.preventDefault();
+             
+               var $index = $(".active-thumb").parent().attr('data-slick-index');
+               $index++;
+               $index = $index-1;
+       
+               var options = {
+                   index: $index,
+                   bgOpacity: 0.9,
+                   showHideOpacity: true
+               }
+               var lightBox = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items, options);
+               lightBox.init();
+           });
+       });
+       </script>
+   </div>
+
+   <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+           <div class="pswp__bg"></div>
+           <div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button><button class="pswp__button pswp__button--share" title="Share"></button><button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button><button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button><button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div></div>
+
+
+</body>
+
+
+
+<%- include('footer') %>
+

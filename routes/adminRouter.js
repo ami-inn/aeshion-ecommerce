@@ -77,5 +77,6 @@ router.post('/edit-order',controller.posteditOrder)
 
 router.get('/sales-report',controller.getsalesReport)
 
+router.get('/single-order/:id',controller.getsingleOrder)
 
 module.exports=router

@@ -621,14 +621,23 @@ module.exports= {
         //         //   });
         //         // console.log(result)            
         //     }
-        //   });
-
-          
-
-         
-          
+        //   });   
       
         res.render('orderManagement',{orders})
+     },
+
+
+     getsingleOrder:async (req,res)=>{
+
+        const _id=req.params.id
+
+        const order=await orderModel.findById({_id}).lean()
+
+        console.log(order)
+
+       res.render('singleOrder',{order})
+
+
      },
 
      geteditOrder:async (req,res)=>{

@@ -845,10 +845,6 @@ module.exports = {
             price=price +(item.price* cart[index].quantity) 
         })
        
-
-        console.log(totalPrice)
-
-      
     
 
         const coupon = await couponModel.findOne({code:couponcode})
@@ -1134,19 +1130,46 @@ module.exports = {
             }
 
              totalPrice  < 0 ? totalPrice=0 : totalPrice;
+
+
+             if(req.session.coupon){
+
+                const couponcode=req.session.coupon.code
+
+
+                const coupon = await couponModel.findOne({code:couponcode})
+
+                orders.push({
+                    address:newAddress.address[0],
+                    product:item,
+                    userId:req.session.user.id,
+                    quantity:cart[i].quantity,
+                    total:totalPrice+50,
+                    paymentType:'online',
+                    paid:true,
+                    coupon:{applied:true,price:coupon.cashback,coupon:coupon}
+                })
+                i++;
+
+              
+
+             }else{
+
+                orders.push({
+                    address:newAddress.address[0],
+                    product:item,
+                    userId:req.session.user.id,
+                    quantity:cart[i].quantity,
+                    total:totalPrice+50,
+                    paymentType:'online',
+                    paid:true
+                })
+                i++;
+
+             }
+
+             req.session.coupon=null
                         
-                  
-                  
-                    orders.push({
-                        address:newAddress.address[0],
-                        product:item,
-                        userId:req.session.user.id,
-                        quantity:cart[i].quantity,
-                        total:totalPrice+50,
-                        paymentType:'online',
-                        paid:true
-                    })
-                    i++;
                 }
                
             const order=await orderModel.create(orders) //work as insert many
