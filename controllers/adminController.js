@@ -604,7 +604,30 @@ module.exports= {
      //ORDERS
 
      getorderManagement:async (req,res)=>{
+        
         const orders=await orderModel.find().sort({createdAt:-1}).lean()
+
+    
+        // grouping the orders with orderIs
+        // var pipeline=orderModel.aggregate([
+        //     { $group: { _id: '$userId', orders: { $push: '$$ROOT' } } }
+        //   ], function (err, result) {
+        //     if (err) {
+        //       console.log(err);
+        //     } else {
+        //         // result.forEach(group => {
+        //         //     console.log(`Orders for user ${group._id}:`);
+        //         //     console.log(group.orders);
+        //         //   });
+        //         // console.log(result)            
+        //     }
+        //   });
+
+          
+
+         
+          
+      
         res.render('orderManagement',{orders})
      },
 

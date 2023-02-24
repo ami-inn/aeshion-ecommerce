@@ -421,7 +421,7 @@
                                                 <div class="qtyField">
                                                     
                                                     <button style=" padding:2px 6px; font-weight: bold; width:30px; height:35px; border-radius:0; float:left;" onclick="decQuantity('<%=cart[index].id%>','<%=item.price%>','<%=item.mrp%>')"><i class="icon icon-minus"></i></button>
-                                                    <input class="cart__qty-input qty" type="text" name="updates[]"id="<%='q'+cart[index].id%>" value="<%=cart[index].quantity%>"  pattern="[0-9]*" readonly>
+                                                    <input style="height: 35px;" class="cart__qty-input qty" type="text" name="updates[]"id="<%='q'+cart[index].id%>"  value="<%=cart[index].quantity%>"  pattern="[0-9]*" readonly>
                                                     <button style=" padding:2px 6px; font-weight: bold; width:30px; height:35px; border-radius:0; float:left;" onclick="addQuantity('<%=cart[index].id%>','<%=item.price%>','<%=item.mrp%>')"><i class="icon icon-plus"></i></button>
                                                 
                                                 </div>

@@ -1,7 +1,37 @@
 <%- include('adminheader') %>
 
+<style>
 
-<%- include('adminheader') -%>
+.del-status{
+	padding: 3px;
+	border-radius: 2px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    font-weight: 500;
+    color: rgb(0, 0, 207);
+    background-color:rgba(0, 0, 255, 0.181);
+}
+.del-status.pending, .del-status.returnProcessing{
+    background-color: #ecbd77;
+    color: #a76d17;
+}
+.del-status.returned, .del-status.cancelled{
+    background-color: #f45f5f;
+    color: #870e0e;
+}
+.del-status.delivered{
+    background-color:#89e1a2;
+    color: #2d643d;
+}
+
+.paid {
+	color: #55b871;
+	font-weight: bold;
+}
+
+</style>
+
 
 
 <body>
@@ -101,8 +131,9 @@
                           <th scope="col">User</th>
                           <th scope="col">Payment status</th>
                           <th scope="col">status</th>
-                          <th scope="col">quantity</th>
+                          <th scope="col">OrderId</th>
                           <th scope="col">total</th>
+						  <th scope="col">View</th>
                           <th scope="col">Action</th>
                         
                             
@@ -115,23 +146,36 @@
                             <th scope="row"><%= index+1%> </th>
                             <td><%= item.product.name  %></td>
                             <td><%=item.address.name%> </td>
-                            <td>
-                                <% if(item.paid){ %> Paid
+                            <td class="paid <%= item.paid  %>">
 
-                               <% }else { %> not paid <% } %>
+                                <% if(item.paid){ %> 
+								<p style="color: #55b871;">Paid</p>	
+
+                               <% }else { %> 
+								<p style="color: #cc5858;">Not Paid</p>
+								<% } %>
+
                             </td>
                               
-                            <td><%= item.orderStatus %></td>
+                            <td>
 
-                            <td ><%= item.quantity %></td>
+								<div class="del-status <%= item.orderStatus %>">
+									<%= item.orderStatus %>
+								</div>
+							
+							</td>
+
+                            <td ><%= item._id %></td>
 
                             <td><%= item.total %></td>
+
+							<td> <a href="/single-order/<%=item._id%>" style="font-size: 25px; color: rgb(2, 38, 19);font-weight: bold;"><ion-icon name="eye-outline"></ion-icon></a></td>
                            
                            
                             <td>
                                 <div style="display: flex; align-items: center; gap: 10px;">
 
-                                    <a href="/admin/edit-order/<%=item._id%>" style="background-color: rgb(88, 88, 195); color: white; padding: 10px 40px; font-size: 18px; font-weight: 300;">Edit</a>
+                                    <a href="/admin/edit-order/<%=item._id%>" style="background-color: rgb(88, 88, 195); color: white; padding: 7px 20px; font-size: 15px; font-weight: 300;">Edit</a>
 
                                 </div>
                             </td>
@@ -173,7 +217,7 @@
 	<script src="/assets/js/toggle.js"></script>
 </body>
 
-<%- include('footer') -%>
+
 
 <%- include('footer') %>
 
