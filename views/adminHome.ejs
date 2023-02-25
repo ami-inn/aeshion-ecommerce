@@ -150,6 +150,9 @@
 					
 				</div>
 
+				<div class="order" id="piechart">
+					
+				</div>
 				
 				
 
@@ -173,9 +176,24 @@
 
 		   var revenueLost='<%= JSON.stringify(monthlyReturn)%>'
 
+		   var deliveredOrder= '<%= JSON.stringify(deliveredOrder)%>'
+
+		   var pendingOrder= '<%= JSON.stringify(PendingOrder)%>'
+
+		   var returnOrder= '<%= JSON.stringify(returnOrder)%>'
+
+		   var cancelOrder= '<%= JSON.stringify(cancelOrder)%>'
+
+		  
+
 		
         let value= JSON.parse(revenueData)
 		let Return= JSON.parse(revenueLost)
+		let Delivered= JSON.parse(deliveredOrder)
+		let pending= JSON.parse(pendingOrder)
+		let returned= JSON.parse(returnOrder)
+		let cancelled= JSON.parse(cancelOrder)
+		
 
 		
      
@@ -189,7 +207,7 @@
 		
         }, {
           name: 'Return',
-          data: Return
+          
         }],
           chart: {
           type: 'bar',
@@ -198,7 +216,7 @@
         plotOptions: {
           bar: {
             horizontal: false,
-            columnWidth: '55%',
+            columnWidth: '50%',
             endingShape: 'rounded'
           },
         },
@@ -215,7 +233,7 @@
         },
         yaxis: {
           title: {
-            text: '₹ (rupees)'
+            text: '₹ (rupees) revenue bar'
           }
         },
         fill: {
@@ -232,6 +250,30 @@
 
         var chart = new ApexCharts(document.querySelector("#chart"), options);
         chart.render();
+
+		var options = {
+          series: [Delivered, pending, returned,cancelled],
+          chart: {
+          width: 380,
+          type: 'pie',
+        },
+        labels: ['delivered', 'pending', 'returned','cancelled'],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+        };
+
+        var piechart = new ApexCharts(document.querySelector("#piechart"), options);
+        piechart.render();
+      
 
 	</script>
 </body>

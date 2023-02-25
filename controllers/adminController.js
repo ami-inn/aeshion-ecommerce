@@ -22,9 +22,19 @@ module.exports= {
             const order= await orderModel.find().lean()
             const monthlyDataArray= await orderModel.aggregate([{$match:{orderStatus:"delivered"}},{$group:{_id:{$month:"$createdAt"}, sum:{$sum:"$total"}}}])
             const monthlyReturnArray=await orderModel.aggregate([{$match:{orderStatus:"returned"}},{$group:{_id:{$month:'$createdAt'},sum:{$sum:'$total'}}}])
+
+
+
+            const deliveredOrder=await orderModel.find({orderStatus:'delivered'}).countDocuments()
             
-            console.log(monthlyReturnArray)
-            console.log(monthlyDataArray)
+            const PendingOrder=await orderModel.find({orderStatus:'pending'}).countDocuments()
+            
+            const returnOrder=await orderModel.find({orderStatus:'returned'}).countDocuments()
+
+            const cancelOrder=await orderModel.find({orderStatus:'cancelled'}).countDocuments()
+
+            
+            
             const user=await userModel.find().lean()
 
             
@@ -71,13 +81,13 @@ module.exports= {
               }
 
 
-              console.log(monthlyReturn)
+              
               
            
 
 
 
-            res.render('adminHome',{totalOrders,users,totalRevenue,monthlyData,monthlyReturn})
+            res.render('adminHome',{totalOrders,users,totalRevenue,monthlyData,monthlyReturn,deliveredOrder,PendingOrder,returnOrder,cancelOrder})
         }else{
             res.redirect('/admin/login')
         }
