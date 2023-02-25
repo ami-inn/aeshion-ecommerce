@@ -173,6 +173,18 @@
         <!--End Page Title-->
         
         <div class="container">
+
+            <% if(!product[0]){ %> 
+                <div class="row">
+                      <div class="empty-container w-100 h-50 d-flex flex-column justify-content-center align-items-center" style="gap:10px">
+                        <img src="/assets/images/empty-wishlist.jfif" height="300px"  alt="">
+                        <h3>Your Cart is empty! <a href="/shop" style="color: rgb(137, 137, 245); font-family: Verdana, Geneva, Tahoma, sans-serif;font-weight: 500;">Add Something --></a></h3>
+                         <p>Looks like you haven't added anything to your cart </p> 
+                      </div>
+                    </div>
+                    <% }else{ %> 
+
+
         	<div class="row">
 
                 <div class="col-12 col-sm-12 col-md-8 col-lg-8 main-col d-none d-md-block">
@@ -620,6 +632,10 @@
 
                 </div>
             </div>
+
+            <% } %>
+
+
         </div>
         
     </div>
