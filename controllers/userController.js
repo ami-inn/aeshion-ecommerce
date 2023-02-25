@@ -247,7 +247,16 @@ module.exports = {
 
         if(req.session.user){
 
-            res.render('newhome',{userName:req.session.user.name,banners})
+            const _id=req.session.user.id
+
+            const user=await userModel.findById({_id}).lean()
+
+            
+
+            let cartLength=user.cart.length
+
+
+            res.render('newhome',{userName:req.session.user.name,banners,cartLength})
             
         }else{
             res.render('newhome',{banners,userName:'login'})
@@ -1334,7 +1343,9 @@ module.exports = {
 
     Blog:(req,res)=>{
         res.render('blog')
-    }
+    },
+
+    AboutUs:(req,res)=>{}
 
 
 }
