@@ -1345,7 +1345,9 @@ module.exports = {
         res.render('blog')
     },
 
-    AboutUs:(req,res)=>{}
+    AboutUs:(req,res)=>{
+        res.render('about-us')
+    }
 
 
 }

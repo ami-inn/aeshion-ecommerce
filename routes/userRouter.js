@@ -100,7 +100,7 @@ router.get('/return-order/:id',controller.returnOrder)
 // EXTRAS
 
 router.get('/blog',controller.Blog)
-router.get('/about-us')
+router.get('/about-us',controller.AboutUs)
 
 
 module.exports=router
