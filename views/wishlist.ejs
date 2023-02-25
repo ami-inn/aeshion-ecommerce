@@ -98,7 +98,7 @@
                             </li>
 
 
-                            <li class="lvl1 parent megamenu"><a href="#">Shop <i class="anm anm-angle-down-l"></i></a>
+                            <li class="lvl1 parent megamenu"><a href="/shop">Shop <i class="anm anm-angle-down-l"></i></a>
                            
 
                             </li>
@@ -109,7 +109,7 @@
 
                         </li>
 
-                        <li class="lvl1 parent dropdown"><a href="#">Pages <i class="anm anm-angle-down-l"></i></a>
+                        <li class="lvl1 parent dropdown"><a href="/about-us">about-us <i class="anm anm-angle-down-l"></i></a>
                      
 
                         </li>
@@ -216,6 +216,16 @@
                 <% }) %> 
 
             </div>
+
+            <div class="row" id="emptyWishlist">
+                <% if(!product[0]){ %>
+                <div class="empty-container w-100 h-50 d-flex flex-column justify-content-center align-items-center" style="gap:10px">
+                  <img src="/assets/images/empty-wishlist.jfif" height="250px" alt="">
+                  <h3>Your wishlist is empty!</h3>
+                  <p>Tap Heart button to start saving your favourites</p>
+                </div>
+                <% } %>
+              </div>
      
         
     </div>
@@ -310,6 +320,18 @@
       window.location.href = "/login"
     } else {
       document.getElementById('wish'+id).style.display="none"
+
+        
+      if(response.data.wishlistSize <= 0){
+        document.getElementById('emptyWishlist').innerHTML=`
+        <div class="empty-container w-100 h-50 d-flex flex-column justify-content-center align-items-center" style="gap:10px">
+        <img src="/images/empty-wishlist.png" height="250px" alt="">
+        <h3>Your wishlist is empty!</h3>
+        <p>Tap Heart button to start saving your favourites</p>
+      </div>
+        `
+      }
+    
     }
 
             }
