@@ -437,8 +437,28 @@
                                         <td class="text-center small--hide"><a href="/remove-from-cart/<%= item._id %> " class="btn btn--secondary cart__remove" title="Remove tem"><i class="icon icon anm anm-times-l"></i></a></td>
                                     </tr>
 
+                                    <tr>
+                                      <td>
+                                        <b id="<%=item._id%>" style="color: red;">
+                            
+                                          <% if(item.quantity == 0){  %>
+                  
+                                              Out Of Stock
+                                              
+                                          <% }else if(item.quantity < cart[index].quantity){ %>
+                  
+                                              only <%= item.quantity %> left
+                  
+                                              <% } %>
+                  
+                                         </b></td>
+                                    </tr>
 
-                                <% }) %> 
+
+                                    <% }) %> 
+
+
+                              
 
 
                                
@@ -453,7 +473,13 @@
                     </table>
                     
                     <div class="currencymsg">We processes all orders in USD. While the content of your cart is currently displayed in USD, the checkout will use USD at the most current exchange rate.</div>
-                    <hr>
+                      <hr>
+
+                  
+
+                      
+
+                      
 					<!-- <div id="shipping-calculator" class="mb-4">
                     	<h5 class="small--text-center">Get shipping estimates</h5>
                         <div class="row">
@@ -736,7 +762,7 @@
                           <input type="checkbox" name="tearm" id="cartTearm" class="checkbox" value="tearm" required>
                            I agree with the terms and conditions</label>
                       </p>
-                      <input onclick="window.location.href='/checkout'"  name="checkout" id="cartCheckout" class="btn btn--small-wide checkout" value="Checkout" >
+                      <input onclick="checkQuantity()"  name="checkout" id="cartCheckout" class="btn btn--small-wide checkout" value="Checkout" >
                       <div class="paymnet-img"><img src="/assets/images/payment-img.jpg" alt="Payment"></div>
                     </div>
 
@@ -842,6 +868,28 @@
 
 let totalPrice=Number('<%=totalPrice%>')
   let totalMrp=Number('<%=totalMrp%>')
+
+
+    
+  function checkQuantity(){
+    axios.post("/check-quantity").then(response=>{
+      if(response?.data?.error){
+        console.log('enter')
+        response.data.outOfQuantity.forEach(item=>{
+          if(item.balanceQuantity<=0){
+            document.getElementById(item.id).innerHTML="Out Of Stock"
+          }else{
+            document.getElementById(item.id).innerHTML="Only "+item.balanceQuantity+" stocks left"
+
+          }
+        })
+      }else{
+        console.log('doesnt entre')
+        window.location.href="/checkout"
+      }
+    })
+  }
+
 
         async function addQuantity(id,price,mrp){
             const response=await axios.get('/add-quantity/'+id)

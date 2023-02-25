@@ -53,6 +53,7 @@ router.use(checkUser)
 
 router.get('/addto-cart/:id',controller.addtoCart)
 router.get('/cart',controller.getCart)
+router.post('/check-quantity',controller.checkQuantity)
 router.get("/add-quantity/:id",controller.addQuantity);
 router.get('/minus-quantity/:id',controller.minQuantity)
 router.get('/remove-from-cart/:id',controller.removefromCart)

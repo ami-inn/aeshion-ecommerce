@@ -501,6 +501,45 @@ module.exports = {
 
     },
 
+
+ checkQuantity:async (req,res)=>{
+
+        
+  let address = req.user.address;
+  const cart = req?.user?.cart ?? [];
+
+  console.log(cart)
+
+  let cartQuantities = {};
+  const cartList = cart.map((item) => {
+    cartQuantities[item.id] = item.quantity;
+    return item.id;
+  });
+  let totalPrice = 0;
+  let products = await productModel
+    .find({ _id: { $in: cartList }})
+    .lean();
+  let quantityError = false;
+  let outOfQuantity = [];
+  for (let item of products) {
+    totalPrice = totalPrice + item.price * cartQuantities[item._id];
+    if (item.quantity < cartQuantities[item._id]) {
+      quantityError = true;
+      outOfQuantity.push({ id: item._id, balanceQuantity: item.quantity });
+    } else {
+    }
+  }
+  req.session.tempOrder = {
+    totalPrice,
+  };
+  if (quantityError) {
+    return res.json({ error: true, outOfQuantity });
+  }
+  return res.json({ error: false });
+
+
+    },
+
     addQuantity:async(req,res)=>{
         
         // const product=await productModel.findById({_id:req.params.id}).lean()
