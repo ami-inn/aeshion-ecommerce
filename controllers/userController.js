@@ -124,7 +124,7 @@ module.exports = {
         let user = await userModel.findOne({email})
     
         //finding an email from over database
-        console.log(user)
+        
     
         if(user){
 
@@ -160,6 +160,9 @@ module.exports = {
     
     forgotPasswordEmail:async (req,res)=>{
 
+        try{
+
+            
         const {email}=req.body
 
         const user=await userModel.findOne({email})
@@ -173,6 +176,8 @@ module.exports = {
 
         console.log(otp)
 
+        
+
         await sendOtp(req.body.email,otp)
 
         req.session.tempuser={
@@ -181,13 +186,36 @@ module.exports = {
 
         return res.redirect('/forgot-pass-verify')
 
+        }
+
+        catch(err){
+            console.log(err)
+            res.redirect('/error-page')
+        }
+
+
     },
 
     forgotPassVerify:(req,res)=>{
-        res.render('forgotPasswordVerify',{email:req.session.tempuser.email})
+
+        try{
+
+            res.render('forgotPasswordVerify',{email:req.session.tempuser.email})
+
+        }
+        catch(err){
+            console.log(err)
+            res.redirect('/error-page')
+        }
+
+       
 
     },
     forgotPasswordVerify:async(req,res)=>{
+
+        try{
+
+            
         const {otp}=req.body
 
         if(req.session.tempuser.otp==otp){
@@ -195,6 +223,14 @@ module.exports = {
         }
 
         return res.render('forgotPassword',{message:'invalid Otp'})
+
+
+        }
+
+        catch(err){
+            console.log(err)
+            res.redirect('/error-page')
+        }
 
     },
 
@@ -219,6 +255,8 @@ module.exports = {
         catch (err){
 
             console.log(err)
+
+            res.redirect('/error-page')
 
         }
         
@@ -267,47 +305,8 @@ module.exports = {
         
     },
 
-    // SHOP
 
 
-    // getuserShop:async (req,res)=>{
-
-    //     try{
-
-    //         let cartcount
-      
-    //         if(req.session.user){
-    //             const _id=req.session.user.id
-    //             const user=await userModel.findOne({_id})
-    //             cartcount=user.cart.length
-    //         }
-          
-
-
-
-
-
-    //         const product=await productModel.find({status:'available'}).lean()
-
-    //         const categories = await categoryModel.find().lean()
-    
-    //         const prdctCount=await productModel.find().lean().countDocuments()
-    
-           
-    
-    
-    //         res.render('userShop1',{product,prdctCount,categories,cartcount})
-    
-    //     }
-
-    //     catch(err){
-    //         console.log(err)
-    //         return res.send('404error')
-    //     }
-
-    // },
-
-    //not complete
 
 
     getuserShop:async(req,res)=>{
@@ -393,14 +392,7 @@ module.exports = {
     getuserProduct:async (req,res)=>{
 
         const _id=req.params.id
-
-      
-     
-
         const product= await productModel.findById(_id).lean()
-    
-   
-
         const products=await productModel.find().limit(5).lean()
 
         
@@ -636,7 +628,7 @@ module.exports = {
 
         const coupon = await couponModel.find({expiry:{$gt:new Date()}}).lean()
 
-        console.log(coupon)
+        
     
     
     
@@ -645,28 +637,43 @@ module.exports = {
     },
 
     editUser: async(req,res)=>{
-       
-    
-    const {name,email,mobile,_id,password}=req.body
+
+        try{
+
+            const {name,email,mobile,_id,password}=req.body
 
 
-    const user=await userModel.findById({_id}).lean()
-    const pass= user.password
+            const user=await userModel.findById({_id}).lean()
+            const pass= user.password
+        
+            
+            if(password == pass){
+        
+                try{      
+                    await userModel.findByIdAndUpdate( _id,{ $set: {name,email,mobile}});
+                    
+                    return res.redirect('/profile')
 
-    
-    if(password == pass){
+                }catch(err){
+                    res.redirect('/error-page')
+                    console.log(err)
+                }
+        
+            }else{
+                res.render('userProfile',{passmessage:'Password inCorrect !',user})
+            }
+        
 
-        try{      
-            await userModel.findByIdAndUpdate( _id,{ $set: {name,email,mobile}});
-            res.redirect("back")
-        }catch(err){
-            console.log(err)
         }
 
-    }else{
-        res.render('userProfile',{passmessage:'Password inCorrect !',user})
-    }
+        catch (err){
+            console.log(err)
+            res.redirect('/error-page')
 
+        }
+       
+    
+   
     },
 
     addAddress:async (req,res)=>{
@@ -754,6 +761,10 @@ module.exports = {
 
 
     applyCoupon:async (req,res)=>{
+
+        try{
+
+            
         const {coupon:couponCode}=req.body
         const _id=req.session.user.id
 
@@ -795,69 +806,83 @@ module.exports = {
 
 
         return res.render('checkout',{totalPrice,message:"coupon applied",user,cart,address,product,couponPrice:totalPrice,cashback:coupon.cashback,couponcode:coupon.code})
-      
+    
 
+        }
 
+        catch(err){
+            console.log(err)
+            res.redirect('/error-page')
+
+        }
     },
 
     applyWallet:async(req,res)=>{
-        const _id=req.session.user.id
 
-        const {amount}=req.body
 
-        console.log('amount = '+amount)
+        try{
 
-        const user= await userModel.findById({_id}).lean()
+            const _id=req.session.user.id
 
-        let wallet=user.wallet-amount
-
-        
-
-        
-
-        const address=user.address
-        const cart=user.cart
-
-        const cartList=cart.map(item=>{
-            return item.id
-        })
-
-        const product=await productModel.find({_id:{$in:cartList}}).lean()
-
-        let totalPrice=0
-
-        product.forEach((item,index)=>{
-            totalPrice=(totalPrice +(item.price* cart[index].quantity))
-        })
-
-        totalPrice=(totalPrice-amount)+50
-
-     
-
-        if(totalPrice<0){
-            wallet=wallet-totalPrice
-            totalPrice=0
-        }
-
-      
-
-        console.log('totalprice'+totalPrice)
-        console.log('wallet= '+wallet)
-        
-
-     
-      
+            const {amount}=req.body
+    
+            console.log('amount = '+amount)
+    
+            const user= await userModel.findById({_id}).lean()
+    
+            let wallet=user.wallet-amount
+    
+            
+    
+            
+    
+            const address=user.address
+            const cart=user.cart
+    
+            const cartList=cart.map(item=>{
+                return item.id
+            })
+    
+            const product=await productModel.find({_id:{$in:cartList}}).lean()
+    
+            let totalPrice=0
+    
+            product.forEach((item,index)=>{
+                totalPrice=(totalPrice +(item.price* cart[index].quantity))
+            })
+    
+            totalPrice=(totalPrice-amount)+50
+    
+         
+    
+            if(totalPrice<0){
+                wallet=wallet-totalPrice
+                totalPrice=0
+            }
+    
+            console.log('totalprice'+totalPrice)
+            console.log('wallet= '+wallet)  
+    
+            res.render('checkout',{wallet,product,totalPrice,user,address,cart,amount})
+         
     
 
+        }
+        catch(err){
+            console.log(err)
+            res.redirect('/error-page')
+        }
 
-        res.render('checkout',{wallet,product,totalPrice,user,address,cart,amount})
-     
-
+       
     },
 
 
     postCheckout:async (req,res)=>{
 
+
+        try{
+
+            
         const {payment,address:addressId,couponcode,walletUse}=req.body
 
 
@@ -1054,6 +1079,17 @@ module.exports = {
 
     res.render('placeOrder')
 }
+
+        }
+
+        catch (err){
+
+            console.log(err)
+            res.redirect('/error-page')
+
+        }
+
+
     
 },
 
@@ -1234,7 +1270,7 @@ module.exports = {
             
           } catch (err) {
             console.log(err);
-            res.send('error')
+            res.redirect('error-page')
           }
     },
 
@@ -1286,9 +1322,23 @@ module.exports = {
 
     getOrderhistory:async (req,res)=>{
 
+        try{
+
+            
         const orders= await orderModel.find({userId:req.session.user.id}).sort({createdAt:-1}).lean()
 
         res.render('orderHistory',{orders})
+
+        }
+
+        catch (err){
+
+            console.log(err)
+
+            res.redirect('/error-page')
+
+        }
+
 
     },
 
@@ -1305,7 +1355,8 @@ module.exports = {
         
 
         catch(err){
-            return res.send('error')
+            console.log(err)
+            return res.redirect('/error-page')
         }
     },
 
@@ -1350,7 +1401,7 @@ module.exports = {
     },
 
     errorPage:(req,res)=>{
-        
+
     },
 
     addReview:async(req,res)=>{

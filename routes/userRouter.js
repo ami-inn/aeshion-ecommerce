@@ -102,7 +102,7 @@ router.get('/return-order/:id',controller.returnOrder)
 router.get('/blog',controller.Blog)
 router.get('/about-us',controller.AboutUs)
 router.post("/add-review",controller.addReview)
-router.get('404Page',controller.errorPage)
+router.get('error-page',controller.errorPage)
 
 
 
