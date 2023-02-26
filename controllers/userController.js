@@ -919,7 +919,7 @@ module.exports = {
                 }
             }
 
-            console.log(req.session.coupon.code)
+            
 
             let orderId = "order_" + createId();
         const options = {
@@ -1349,6 +1349,10 @@ module.exports = {
         res.render('about-us')
     },
 
+    errorPage:(req,res)=>{
+        
+    },
+
     addReview:async(req,res)=>{
         const { proId, review,name,email } = req.body;
       const reviewExist = await productModel.findOne({
@@ -1364,10 +1368,16 @@ module.exports = {
           "ratings.$.name": name,
           "ratings.$.email": email,
           "ratings.$.review": review,
+          "ratings.$.date": Date.now(),
         },
       }
     );
   } else {
+
+    const currenDate=new Date()
+    const dateString = currenDate.toLocaleDateString()
+    
+
     await productModel.updateOne(
       { _id: proId },
       {
@@ -1376,6 +1386,7 @@ module.exports = {
             userId: req.session.user.id,
             name:name,
             email:email,
+            Date:dateString,
             review,
           },
         },
