@@ -1202,12 +1202,12 @@ module.exports = {
 
                 const coupon = await couponModel.findOne({code:couponcode})
 
-                console.log(coupon)
+                
 
                 totalPrice=totalPrice-(coupon.cashback / cartLength).toFixed(2)
             }
 
-            console.log(totalPrice)
+            
 
             if(req.session.wallet){
                 totalPrice=totalPrice-(req.session.wallet.amount/cartLength).toFixed(2)

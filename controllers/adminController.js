@@ -106,10 +106,10 @@ module.exports= {
 
     postadminLogin:async (req,res)=>{
         const {email,password}=req.body
-        console.log(req.body)
+        
 
         let admin=await adminModel.findOne({email})
-        console.log(admin)
+        
 
         if(admin){
             if(password==admin.password){
@@ -146,13 +146,13 @@ module.exports= {
     searchuser:async (req,res)=>{
         const {key} = req.body
     const users= await userModel.find({$or:[{name:new RegExp(key,"i")},{email:new RegExp(key,'i')}]}).lean()
-    console.log(users)
+
     res.render('usermanage',{users})
      },
 
      getuserBlock:async(req,res)=>{
         var id=req.params.id
-        console.log(id)
+
         
         await userModel.findByIdAndUpdate(id,{$set:{status:'block'}}).then(()=>{
 
@@ -166,8 +166,7 @@ module.exports= {
 
      getuserunBlock:async(req,res)=>{
         var id=req.params.id
-        console.log(id)
-        
+                
         await userModel.findByIdAndUpdate(id,{$set:{status:'unblock'}}).then(()=>{
 
             res.redirect('/admin/usermanage')
@@ -232,7 +231,7 @@ module.exports= {
 
             const {name,category,quantity,price,brand,description,mrp}=req.body
 
-            console.log(req.body)
+        
 
             const product=new productModel({
                 name,category,quantity,price,brand,description,mrp,mainImage:req.files.image[0],
@@ -290,7 +289,7 @@ module.exports= {
 
             const {name,category,quantity,mrp,brand,price,description,_id}=req.body
 
-            console.log(req.body)
+            
             
            // console.log(req.files)
 
