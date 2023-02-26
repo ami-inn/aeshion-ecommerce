@@ -1,8 +1,6 @@
 <%- include('adminheader') %>
 
 
-<%- include('adminheader') -%>
-
 
 <body>
 
@@ -80,14 +78,36 @@
 	<!-- SIDEBAR -->
 
 
+	
+
+
 
 	<!-- CONTENT -->
-	<section class="content" id="blur">
+	<section class="content" id="content">
+
+
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<a href="/" class="nav-link">Home</a>
+			<form action="#">
+				<div class="form-input">
+				
+				</div>
+			</form>
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			
+			
+		</nav>
+
+		
+
+
 		<!-- NAVBAR -->	
 		<main class="content-main">		
             
-            <div class="product-nav" style="display: flex;justify-content: space-between;"> 
-			<div>
+            <div class="product-nav" style="display:flex;justify-content: space-between;gap: 10px;"> 
+			<div >
 
                 <form  class="search-form" role="search" method="post" action="/admin/search-product/">
                     <div class="form-input">
@@ -101,7 +121,10 @@
 
                 
                 <a href="/admin/add-product">
-                    <button class="btn btn-dark w-30"  >Add Product </button>
+                    <button class="d-none d-md-block"  style="padding: 8px 20px; background-color: rgb(17, 17, 17); color: white; border-radius: 10px;"  >Add Product </button>
+
+					<button class="d-blck d-md-none"  style="padding: 10px 25px; background-color: rgb(17, 17, 17); color: white; border-radius: 10px;"  >Add </button>
+
                 </a>
                 
             </div>
@@ -210,5 +233,5 @@
 
 <%- include('footer') -%>
 
-<%- include('footer') %>
+
 
