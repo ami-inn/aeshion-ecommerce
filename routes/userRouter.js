@@ -102,5 +102,8 @@ router.get('/return-order/:id',controller.returnOrder)
 router.get('/blog',controller.Blog)
 router.get('/about-us',controller.AboutUs)
 
+router.post("/add-review",controller.addReview)
+
+
 
 module.exports=router

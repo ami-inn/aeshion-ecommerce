@@ -1347,7 +1347,43 @@ module.exports = {
 
     AboutUs:(req,res)=>{
         res.render('about-us')
-    }
+    },
 
+    addReview:async(req,res)=>{
+        const { proId, review,name,email } = req.body;
+      const reviewExist = await productModel.findOne({
+    _id: proId,
+    reviews: { $elemMatch: { userId: req.session.user.id } },
+  });
+  if (reviewExist) {
+    await productModel.updateOne(
+      { _id: proId, reviews: { $elemMatch: { userId: req.session.user.id } } },
+      {
+        $set: {
+          "ratings.$.userId": req.session.user.id,
+          "ratings.$.name": name,
+          "ratings.$.email": email,
+          "ratings.$.review": review,
+        },
+      }
+    );
+  } else {
+    await productModel.updateOne(
+      { _id: proId },
+      {
+        $addToSet: {
+          ratings: {
+            userId: req.session.user.id,
+            name:name,
+            email:email,
+            review,
+          },
+        },
+      }
+    );
+  }
+  res.redirect("back");
+
+    }
 
 }

@@ -17,6 +17,9 @@
 <!-- Main Style CSS -->
 <link rel="stylesheet" href="/assets/css/style.css">
 <link rel="stylesheet" href="/assets/css/responsive.css">
+
+
+
 </head>
 <body class="template-product template-product-right-thumb belle">
 	<div class="pageWrapper">
@@ -585,48 +588,48 @@
                             <div id="tab2" class="tab-content">
                                 <div id="shopify-product-reviews">
                                     <div class="spr-container">
-                                        <div class="spr-header clearfix">
+                                        <!-- <div class="spr-header clearfix">
                                             <div class="spr-summary">
                                                 <span class="product-review"><a class="reviewLink"><i class="font-13 fa fa-star"></i><i class="font-13 fa fa-star"></i><i class="font-13 fa fa-star"></i><i class="font-13 fa fa-star-o"></i><i class="font-13 fa fa-star-o"></i> </a><span class="spr-summary-actions-togglereviews">Based on 6 reviews456</span></span>
                                                 <span class="spr-summary-actions">
                                                     <a href="#" class="spr-summary-actions-newreview btn">Write a review</a>
                                                 </span>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="spr-content">
                                             <div class="spr-form clearfix">
-                                                <form method="post" action="#" id="new-review-form" class="new-review-form">
+                                                <form method="post" action="/add-review" id="new-review-form" class="new-review-form">
                                                     <h3 class="spr-form-title">Write a review</h3>
+
+                                                    <input type="text" name="proId" value="<%=order.product._id%>" style="height: 0px; visibility: hidden;" >
+                                                 
+
                                                     <fieldset class="spr-form-contact">
                                                         <div class="spr-form-contact-name">
-                                                          <label class="spr-form-label" for="review_author_10508262282">Name</label>
-                                                          <input class="spr-form-input spr-form-input-text " id="review_author_10508262282" type="text" name="review[author]" value="" placeholder="Enter your name">
+                                                          <label class="spr-form-label" for="review_author_10508262282" >Name</label>
+                                                          <input class="spr-form-input spr-form-input-text " id="review_author_10508262282" type="text" name="name" value="" required placeholder="Enter your name">
                                                         </div>
                                                         <div class="spr-form-contact-email">
                                                           <label class="spr-form-label" for="review_email_10508262282">Email</label>
-                                                          <input class="spr-form-input spr-form-input-email " id="review_email_10508262282" type="email" name="review[email]" value="" placeholder="john.smith@example.com">
+                                                          <input class="spr-form-input spr-form-input-email " id="review_email_10508262282" type="email" name="email" value="" required placeholder="john.smith@example.com">
                                                         </div>
                                                     </fieldset>
                                                     <fieldset class="spr-form-review">
-                                                      <div class="spr-form-review-rating">
-                                                        <label class="spr-form-label">Rating</label>
-                                                        <div class="spr-form-input spr-starrating">
-                                                          <div class="product-review"><a class="reviewLink" href="#"><i class="fa fa-star-o"></i><i class="font-13 fa fa-star-o"></i><i class="font-13 fa fa-star-o"></i><i class="font-13 fa fa-star-o"></i><i class="font-13 fa fa-star-o"></i></a></div>
-                                                        </div>
-                                                      </div>
+                                                   
                                                 
-                                                      <div class="spr-form-review-title">
-                                                        <label class="spr-form-label" for="review_title_10508262282">Review Title</label>
-                                                        <input class="spr-form-input spr-form-input-text " id="review_title_10508262282" type="text" name="review[title]" value="" placeholder="Give your review a title">
-                                                      </div>
                                                 
                                                       <div class="spr-form-review-body">
                                                         <label class="spr-form-label" for="review_body_10508262282">Body of Review <span class="spr-form-review-body-charactersremaining">(1500)</span></label>
                                                         <div class="spr-form-input">
-                                                          <textarea class="spr-form-input spr-form-input-textarea " id="review_body_10508262282" data-product-id="10508262282" name="review[body]" rows="10" placeholder="Write your comments here"></textarea>
+                                                          <textarea class="spr-form-input spr-form-input-textarea " id="review_body_10508262282" data-product-id="10508262282" name="review" rows="10" placeholder="Write your comments here" required></textarea>
                                                         </div>
                                                       </div>
                                                     </fieldset>
+
+                                                   
+
+                                                  
+
                                                     <fieldset class="spr-form-actions">
                                                         <input type="submit" class="spr-button spr-button-primary button button-primary btn btn-primary" value="Submit Review">
                                                     </fieldset>
