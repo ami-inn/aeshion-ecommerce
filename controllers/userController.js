@@ -281,7 +281,7 @@ module.exports = {
 
         const banners = await bannerModel.find().lean()
 
-        console.log(banners)
+        
 
         if(req.session.user){
 
@@ -340,7 +340,7 @@ module.exports = {
             count = products.length;
         }
 
-        console.log(products)
+        
        
         const categories=await categoryModel.find().lean()
        return res.render('userShop1',{products, key, filter, categories, category})
@@ -1401,6 +1401,8 @@ module.exports = {
     },
 
     errorPage:(req,res)=>{
+
+        res.render('errorPage')
 
     },
 

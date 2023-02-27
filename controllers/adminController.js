@@ -764,7 +764,6 @@ module.exports= {
       let byCategory= await orderModel.aggregate([{$match:{createdAt: { $gt: startDate, $lt: endDate }}},{$group:{_id:"$product.category", count:{$sum:1}, price:{$sum:"$product.price"}}}])
       let byBrand= await orderModel.aggregate([{$match:{createdAt: { $gt: startDate, $lt: endDate}}},{$group:{_id:"$product.brand", count:{$sum:1}, profit:{$sum:"$product.price"}}}])
     
-      console.log(byCategory)
     
       let category={}
       let categoryIds= byCategory.map(item=>{
@@ -772,7 +771,7 @@ module.exports= {
         return item._id
       });
 
-      console.log(categoryIds)
+      
 
     //   let categories= await categoryModel.find({_id:{$in:categoryIds}}, {category:1}).lean()
     //   categories.forEach((item, index)=>{
@@ -780,7 +779,7 @@ module.exports= {
     //     categories[index].profit= category[item._id].total
     //   })
 
-      console.log(byCategory)
+      
 
       let filter=req.query.filter ?? "";
       if(!req.query.filter && !req.query.startDate){
