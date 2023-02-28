@@ -149,7 +149,7 @@
                 
                           <tr>
                             <th scope="row"><%= item.name  %> </th>
-                            <td><img src="http://localhost:3000/product-images/<%= item.mainImage.filename%>" style="height: 50px;" alt=""></td>
+                            <td><img src="<%= item.mainImage.url  %>" style="height: 50px;" alt=""></td>
                             <td><%=item.category %> </td>
                             <td><%=item.status %> </td>
                            

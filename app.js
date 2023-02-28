@@ -5,7 +5,8 @@ const catcheControl=require('./middlewares/cache-control')
 const MongoStore = require('connect-mongo');
 
 const userRouter=require('./routes/userRouter')
-const adminRouter=require('./routes/adminRouter')
+const adminRouter=require('./routes/adminRouter');
+const cloudinary = require('./config/cloudinary/cloudinary');
 // const path=require('path')
 
 require('dotenv').config()
@@ -13,6 +14,19 @@ require('dotenv').config()
 
 const app=express()
 connectDB()
+
+app.get("/check", async (req, res)=>{
+    try{
+
+        let imgUpload= await cloudinary.uploader.upload('public/assets/images/about1.jpg',{
+            folder:"Aeshion"
+        })
+        res.json(imgUpload)
+    }catch(err){
+        console.log(err)
+        res.json(err)
+    }
+})
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))

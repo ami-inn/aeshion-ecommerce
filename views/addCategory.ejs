@@ -112,6 +112,11 @@
                             <div class="p-t-15">
                                 <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
                             </div>
+
+							<% if (typeof message !== "undefined") { %>
+								<p style="color: red;"><%= message %></p>
+							<% } %>
+
                         </form>
                     </div>
                 </div>
