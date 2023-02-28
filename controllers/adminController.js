@@ -253,7 +253,7 @@ module.exports = {
             let imageFile=await cloudinary.uploader.upload(mainImage.path,{folder:'Aeshion'})
             mainImage=imageFile;
 
-            console.log(mainImage)
+        
 
             for (let i in sideImages) {
                 let imageFile=await cloudinary.uploader.upload(sideImages[i].path,{folder:'Aeshion'})
@@ -275,7 +275,7 @@ module.exports = {
                     res.render('add-product', { error: true, message: "Fields validation failed", categories })
                 } else {
                     res.redirect('/admin/product-management')
-                    console.log('completed')
+                    
                 }
             })
 
@@ -319,16 +319,34 @@ module.exports = {
 
             const { name, category, quantity, mrp, brand, price, description, _id } = req.body
 
+            let mainImage=req.files?.image?.[0]
+            let sideImages=req.files?.images
+
+            if(req.files?.image){
+
+                let imageFile=await cloudinary.uploader.upload(mainImage.path,{folder:'Aeshion'})
+                mainImage=imageFile
+            }
+
+            if(req.files?.images){
+
+            for(let i in req.files.images){
+                let imageFile=await cloudinary.uploader.upload(sideImages[i].path,{folder:'Aeshion'})
+                sideImages[i]=imageFile
+
+            }
+
+            }
 
 
             // console.log(req.files)
 
             if (req.files.image && req.files.images) {
-                console.log('first')
+                
                 await productModel.findByIdAndUpdate(_id, {
                     $set: {
-                        name, category, quantity, brand, price, mrp, description, mainImage: req.files.image[0],
-                        sideImages: req.files.images
+                        name, category, quantity, brand, price, mrp, description, mainImage,
+                        sideImages
                     }
                 })
 
@@ -336,11 +354,11 @@ module.exports = {
             }
 
             if (!req.files.image && req.files.images) {
-                console.log('second')
+                
                 await productModel.findByIdAndUpdate(_id, {
                     $set: {
                         name, category, quantity, brand, mrp, price, description,
-                        sideImages: req.files.images
+                        sideImages
                     }
                 })
 
@@ -348,10 +366,10 @@ module.exports = {
             }
 
             if (req.files.image && !req.files.images) {
-                console.log('third')
+                
                 await productModel.findByIdAndUpdate(_id, {
                     $set: {
-                        name, category, quantity, brand, mrp, price, description, mainImage: req.files.image[0]
+                        name, category, quantity, brand, mrp, price, description, mainImage
                     }
                 })
 
@@ -359,7 +377,7 @@ module.exports = {
             }
 
             if (!req.files.image && !req.files.images) {
-                console.log('four')
+                
 
                 await productModel.updateOne({ _id }, {
                     $set: {
