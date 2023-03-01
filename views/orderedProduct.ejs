@@ -187,7 +187,7 @@
                                 <div class="product-details-img">
                                     <div class="zoompro-wrap product-zoom-right pl-20">
                                         <div class="zoompro-span">
-                                            <img class="blur-up lazyload zoompro" data-zoom-image="/product-images/<%=order.product.mainImage.filename%>" alt="" src="/product-images/<%=order.product.mainImage.filename%>" />
+                                            <img class="blur-up lazyload zoompro" data-zoom-image="<%=order.product.mainImage.url%>" alt="" src="<%=order.product.mainImage.url%>" />
                                         </div>
                                         <div class="product-buttons">
                                             <a href="https://www.youtube.com/watch?v=93A2jOW5Mog" class="btn popup-video" title="View Video"><i class="icon anm anm-play-r" aria-hidden="true"></i></a>
@@ -198,7 +198,7 @@
 
                                         <% order.product.sideImages.forEach(item=>{ %>
 
-                                        <a href="http://localhost:3000/product-images/<%= item.filename %>" data-size="1462x2048"></a>
+                                        <a href="<%= item.url %>" data-size="1462x2048"></a>
 
                                         <% }) %>
 
@@ -206,14 +206,14 @@
         							<div class="product-thumb">
                                         <div id="gallery" class="product-dec-slider-2 product-tab-left">
 
-                                            <a data-image="/product-images/<%=order.product.mainImage.filename%>" data-zoom-image="/product-images/<%=order.product.mainImage.filename%>" class="slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1">
-                                                <img class="blur-up lazyload" src="/product-images/<%=order.product.mainImage.filename%>" alt="" />
+                                            <a data-image="<%=order.product.mainImage.url%>" data-zoom-image="<%=order.product.mainImage.url%>" class="slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1">
+                                                <img class="blur-up lazyload" src="<%=order.product.mainImage.url%>" alt="" />
                                             </a>
 
                                             <% order.product.sideImages.forEach(item=>{ %>
                                            
-                                                <a data-image="http://localhost:3000/product-images/<%= item.filename %>" data-zoom-image="http://localhost:3000/product-images/<%= item.filename %>" class="slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1">
-                                                <img class="blur-up lazyload" src="http://localhost:3000/product-images/<%= item.filename %>" alt="" />
+                                                <a data-image="<%=item.url%>" data-zoom-image="<%=item.url %>" class="slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1">
+                                                <img class="blur-up lazyload" src="<%= item.url %>" alt="" />
                                             </a>
                                     
                                             <% }) %>
@@ -235,7 +235,7 @@
                                     <p class="product-single__price product-single__price-product-template">
                                         <span class="visually-hidden">Regular price</span>
                                         <span class="product-price__price product-price__price-product-template">
-                                            <span id="ProductPrice-product-template"><span class="money">₹ <%=order.total  %></span></span>
+                                            <span id="ProductPrice-product-template"><span class="money">₹ <%=order.product.price  %></span></span>
                                         </span>
                                     </p>
                                     <div class="product-single__description rte">
@@ -312,6 +312,7 @@
                             	<div class="product-info">
                                   <p class="product-type"><span class="lbl">Product Type:</span> <a href="#" title="Women's"><%= order.product.category  %></a></p>
                                   <p class="product-cat"> <span class="lbl">Quantity: </span><a href="#" title=""><%= order.quantity %></a> </p>
+                                  <p class="product-cat"> <span class="lbl">Total: </span><a href="#" title=""><%= order.total %></a> </p>
                                   <p class="product-cat"> <span class="lbl">OrderId: </span><a href="#" title="" style="color: rgb(230, 110, 110); font-weight: bold;"><%= order._id %></a> </p>
 
                                   <% if(order.orderStatus == 'pending'){ %>
@@ -650,7 +651,7 @@
     function downloadInvoice(){
     const { jsPDF } = window.jspdf;
     const doc= new jsPDF();
-    doc.text(15, 20, "Cart Genie Invoice");
+    doc.text(15, 20, "Aeshion Invoice");
     doc.setFontSize(12);
       doc.text(15, 30, "Invoice No : "+orderId);
       doc.text(15, 40, "Name : "+userName);

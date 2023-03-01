@@ -763,7 +763,7 @@ module.exports = {
         let totalPrice = 0
 
         product.forEach((item, index) => {
-            totalPrice = (totalPrice + (item.price * cart[index].quantity)) + 50
+            totalPrice = (totalPrice + (item.price * cart[index].quantity))
         })
 
         res.render('checkout', { product, totalPrice, address, cart, user })
@@ -862,7 +862,7 @@ module.exports = {
                 totalPrice = (totalPrice + (item.price * cart[index].quantity))
             })
 
-            totalPrice = (totalPrice - amount) + 50
+            totalPrice = (totalPrice - amount) 
 
 
 
@@ -871,8 +871,7 @@ module.exports = {
                 totalPrice = 0
             }
 
-            console.log('totalprice' + totalPrice)
-            console.log('wallet= ' + wallet)
+         
 
             res.render('checkout', { wallet, product, totalPrice, user, address, cart, amount })
 
@@ -932,6 +931,15 @@ module.exports = {
 
 
             const coupon = await couponModel.findOne({ code: couponcode })
+            let tempCashback
+
+            if(coupon){
+                 tempCashback=coupon.cashback
+            }else{
+                 tempCashback=0
+            }
+
+        
 
 
 
@@ -970,7 +978,7 @@ module.exports = {
                     },
                     data: {
                         order_id: orderId,
-                        order_amount: price,
+                        order_amount: (price-tempCashback),
                         order_currency: "INR",
                         customer_details: {
                             customer_id: _id,
@@ -1005,10 +1013,14 @@ module.exports = {
                 if (walletUse) {
                     wallet = wallet - walletUse
 
-                    price = price - walletUse
+                    
+
+                    price = (price - walletUse )
+
+                    
 
                     if (price < 0) {
-                        wallet = wallet - totalPrice
+                        wallet = wallet-price
                         price = 0
                     }
                     await userModel.updateOne({ _id }, {
@@ -1051,19 +1063,18 @@ module.exports = {
                             product: item,
                             userId: req.session.user.id,
                             quantity: cart[i].quantity,
-                            total: totalPrice + 50,
-                            paid: true,
-                            paymentType: 'Wallet'
+                            total: totalPrice,
+                            wallet:{applied:true}
                         })
 
 
-                    } if (coupon) {
+                    }else if (coupon) {
                         orders.push({
                             address: address[0],
                             product: item,
                             userId: req.session.user.id,
                             quantity: cart[i].quantity,
-                            total: totalPrice + 50,
+                            total: totalPrice ,
                             coupon: { applied: true, price: coupon.cashback, coupon: coupon }
                         })
                     }
@@ -1074,7 +1085,7 @@ module.exports = {
                             product: item,
                             userId: req.session.user.id,
                             quantity: cart[i].quantity,
-                            total: totalPrice + 50,
+                            total: totalPrice ,
 
                         })
                     }
@@ -1173,18 +1184,22 @@ module.exports = {
 
                 if (req.session.wallet) {
 
+                   
+
                     let walletAmount = req.session.wallet.amount
+
+                    
 
                     wallet = wallet - walletAmount
 
                     price = price - walletAmount
 
                     if (price < 0) {
-                        wallet = wallet - totalPrice
+                        wallet = wallet-price
                         price = 0
                     }
 
-                    wallet < 0 ? wallet = 0 : wallet;
+                    
 
                 
 
@@ -1210,8 +1225,12 @@ module.exports = {
 
                     totalPrice = (cart[i].quantity * item.price)
 
+                  
+
 
                     if (req.session.coupon) {
+
+                        console.log('enterrrrr')
 
                         const couponcode = req.session.coupon.code
 
@@ -1219,37 +1238,68 @@ module.exports = {
                         const coupon = await couponModel.findOne({ code: couponcode })
 
 
+                        
 
                         totalPrice = totalPrice - (coupon.cashback / cartLength).toFixed(2)
+
+                        
+                        
                     }
 
 
 
-                    if (req.session.wallet) {
-                        totalPrice = totalPrice - (req.session.wallet.amount / cartLength).toFixed(2)
+                    // if (req.session.wallet) {
+
+                    //     let walletAmount = req.session.wallet.amount
+
+                    //     console.log('walletAmount',walletAmount)
+
+                    //     totalPrice = totalPrice - (walletAmount / cartLength).toFixed(2)
+
+                    //     console.log('totalprice',totalPrice)
+                    // }
+
+                    // totalPrice < 0 ? totalPrice = 0 : totalPrice;
+
+                    
+
+                    if(req.session.wallet){
+
+                        orders.push({
+                            address:  newAddress.address[0],
+                            product: item,
+                            userId: req.session.user.id,
+                            quantity: cart[i].quantity,
+                            paymentType: 'online',
+                            paid: true,
+                            total: totalPrice,
+                            wallet:{applied:true}
+                        })
+
+
                     }
 
-                    totalPrice < 0 ? totalPrice = 0 : totalPrice;
 
-
-                    if (req.session.coupon) {
+                    else if (req.session.coupon) {
 
                         const couponcode = req.session.coupon.code
 
 
                         const coupon = await couponModel.findOne({ code: couponcode })
+
+                       
 
                         orders.push({
                             address: newAddress.address[0],
                             product: item,
                             userId: req.session.user.id,
                             quantity: cart[i].quantity,
-                            total: totalPrice + 50,
+                            total: totalPrice ,
                             paymentType: 'online',
                             paid: true,
                             coupon: { applied: true, price: coupon.cashback, coupon: coupon }
                         })
-                        i++;
+                        
 
 
 
@@ -1260,15 +1310,15 @@ module.exports = {
                             product: item,
                             userId: req.session.user.id,
                             quantity: cart[i].quantity,
-                            total: totalPrice + 50,
+                            total: totalPrice ,
                             paymentType: 'online',
                             paid: true
                         })
-                        i++;
+                        
 
                     }
 
-                    req.session.coupon = null
+                    i++
 
                 }
 
@@ -1276,6 +1326,12 @@ module.exports = {
                 await userModel.findByIdAndUpdate({ _id }, {
                     $set: { cart: [] }
                 })
+
+
+                req.session.coupon=null
+                req.session.wallet=null
+
+               
 
 
                 return res.render('placeOrder')

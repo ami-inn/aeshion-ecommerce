@@ -196,7 +196,7 @@
                                     <% orders.forEach((item)=>{ %>
                                      <tr>
                                     	<td class="product-thumbnail text-center">
-                                            <a href="#"><img src="/product-images/<%=item.product.mainImage.filename%>" alt="" title="" /></a>
+                                            <a href="#"><img src="<%=item.product.mainImage.url%>" alt="" title="" /></a>
                                         </td>
                                         <td class="product-name"><h4 class="no-margin"><a href="#"><%= item.product.name %> </a></h4></td>
                                         <td class="product-price text-center"><span class="amount">₹<%= item.total  %></span></td>

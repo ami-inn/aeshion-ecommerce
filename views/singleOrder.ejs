@@ -132,7 +132,7 @@
                                 <div class="product-details-img" style="width: 400px;">
                                     <div class="zoompro-wrap product-zoom-right pl-20">
                                         <div class="zoompro-span">
-                                            <img class="blur-up lazyload zoompro" data-zoom-image="/product-images/<%=order.product.mainImage.filename%>" alt="" src="/product-images/<%=order.product.mainImage.filename%>" />
+                                            <img class="blur-up lazyload zoompro" data-zoom-image="<%=order.product.mainImage.url%>" alt="" src="<%=order.product.mainImage.url%>" />
                                         </div>
                                         <div class="product-buttons">
                                             <a href="https://www.youtube.com/watch?v=93A2jOW5Mog" class="btn popup-video" title="View Video"><i class="icon anm anm-play-r" aria-hidden="true"></i></a>
@@ -189,17 +189,37 @@
                                     
                                     </a> </p>
 
+
+
                                  
 
                                     <% if(order.coupon.applied){ %>
                                         <p  class="product-cat"> <span class="lbl">Coupon Name : </span><a style="color: rgb(0, 0, 0); font-weight: bold;" title=""><%= order.coupon.coupon.name %></a> </p>   
-                                  <p  class="product-cat"> <span class="lbl">Cash Back : </span><a style="color: rgb(6, 189, 171); font-weight: bold; " title=""><%= order.coupon.coupon.cashback %></a> </p>
+                                  <p  class="product-cat"> <span class="lbl">Cash Back : </span><a style="color: rgb(6, 189, 171); font-weight: bold; " title="">₹<%=  ( order.quantity * order.product.price )-order.total %></a> </p>
 
                                   <% } %>
+
+                                  <p class="product-cat"> <span class="lbl"> Wallet : </span><a style="font-weight:bold; color: rgb(119, 145, 240);" title="">
+                                    
+                                    <%=order.wallet.applied ? "used ": "not Used" %>
+
+
+                                    
+                                    
+                                    </a> </p>
+
+                                    <% if(order.wallet.applied){ %>
+                         
+                                  <p  class="product-cat"> <span class="lbl">Amount From Wallet : </span><a style="color: rgb(6, 189, 171); font-weight: bold; " title="">₹<%=  ( order.quantity * order.product.price )-order.total %></a> </p>
+
+                                  <% } %>
+
+                                    
                                   
 
                                   <p class="product-cat"> <span class="lbl">Payment type: </span><a href="#" title="" style="font-weight: bold;"><%= order.paymentType %></a> </p>
-                                  <p class="product-cat"> <span class="lbl">Amount to pay : </span><a href="#" title="" style="color: rgba(42, 189, 74, 0.912);font-weight: bold;"><%= order.total %></a> </p>
+                                  <!-- <p class="product-cat"> <span class="lbl">Delivery Charge : </span><a href="#" title="" style="color: rgba(0, 0, 0, 0.912);font-weight: bold;">₹50</a> </p> -->
+                                  <p class="product-cat"> <span class="lbl">Amount to pay : </span><a href="#" title="" style="color: rgba(42, 189, 74, 0.912);font-weight: bold;">₹<%= order.total %></a> </p>
                                   <p class="product-cat"> <span class="lbl">Order Status : </span><a href="#" title="" style="color: rgba(0, 0, 0, 0.912);font-weight: bold;"><%= order.orderStatus %></a> </p>
 
                                   <% if(order.orderStatus == 'pending'){ %>

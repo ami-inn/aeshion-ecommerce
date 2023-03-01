@@ -49,6 +49,11 @@ const orderSchema=new mongoose.Schema({
         default:{applied:false, price:0, coupon:{}}
     },
 
+    wallet:{
+        type:Object,
+        default:{applied:false}
+    },
+
     total:{
         type:Number,
         required:true
