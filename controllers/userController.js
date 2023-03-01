@@ -393,7 +393,16 @@ module.exports = {
 
         const _id = req.params.id
         const product = await productModel.findById(_id).lean()
-        const products = await productModel.find().limit(5).lean()
+
+        const count=await productModel.countDocuments()
+
+        const randomIndex = Math.floor(Math.random() * count);
+
+       
+
+        const category=product.category
+
+        const products = await productModel.find({category:category}).skip(randomIndex).limit(5).lean()
 
 
 

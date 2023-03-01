@@ -197,16 +197,16 @@
                                         <div id="gallery" class="product-dec-slider-2 product-tab-left">
 
 
-                                            <a data-image="http://localhost:3000/product-images/<%= product.mainImage.filename  %>" data-zoom-image="http://localhost:3000/product-images/<%= product.mainImage.filename  %>" class="slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1">
-                                                <img class="blur-up lazyload" src="http://localhost:3000/product-images/<%= product.mainImage.filename  %>" alt="" />
+                                            <a data-image="<%= product.mainImage.url %>" data-zoom-image="<%= product.mainImage.url  %>" class="slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1">
+                                                <img class="blur-up lazyload" src="<%= product.mainImage.url  %>" alt="" />
                                             </a>
                                            
 
 
                                             <% product.sideImages.forEach(item=>{ %>
 
-                                                <a data-image="http://localhost:3000/product-images/<%= item.filename %>" data-zoom-image="http://localhost:3000/product-images/<%= item.filename %>" class="slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1">
-                                                    <img class="blur-up lazyload" src="http://localhost:3000/product-images/<%= item.filename %>" alt="" />
+                                                <a data-image="<%= item.url %>" data-zoom-image="<%= item.url %>" class="slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1">
+                                                    <img class="blur-up lazyload" src="<%= item.url %>" alt="" />
                                                 </a>
                                                
                                               
@@ -219,7 +219,7 @@
                                     </div>
                                     <div class="zoompro-wrap product-zoom-right pl-20">
                                         <div class="zoompro-span">
-                                            <img class="blur-up lazyload zoompro" data-zoom-image="http://localhost:3000/product-images/<%= product.mainImage.filename  %>" alt="" src="http://localhost:3000/product-images/<%= product.mainImage.filename  %>" />
+                                            <img class="blur-up lazyload zoompro" data-zoom-image="<%= product.mainImage.url  %>" alt="" src="<%= product.mainImage.url %>" />
                                         </div>
                                         <div class="product-labels"><span class="lbl on-sale">Sale</span><span class="lbl pr-label1">new</span></div>
                                         <div class="product-buttons">
@@ -546,10 +546,10 @@
                                         <!-- start product image -->
                                         <a href="#">
                                             <!-- image -->
-                                            <img class="primary blur-up lazyload" data-src="http://localhost:3000/product-images/<%= item.mainImage.filename%>" src="http://localhost:3000/product-images/<%=item.mainImage.filename%>" alt="image" title="product">
+                                            <img class="primary blur-up lazyload" data-src="<%= item.mainImage.url%>" src="<%=item.mainImage.url%>" alt="image" title="product">
                                             <!-- End image -->
                                             <!-- Hover image -->
-                                            <img class="hover blur-up lazyload" data-src="http://localhost:3000/product-images/<%= item.mainImage.filename%>" src="http://localhost:3000/product-images/<%= item.mainImage.filename%>" alt="image" title="product">
+                                            <img class="hover blur-up lazyload" data-src="<%= item.mainImage.url%>" src="<%= item.mainImage.url%>" alt="image" title="product">
                                             <!-- End hover image -->
                                             <!-- product label -->
                                             <!-- End product label -->
