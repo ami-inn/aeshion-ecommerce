@@ -222,7 +222,7 @@
             <div class="home-slideshow">
                 <div class="slide">
                     <div class="blur-up lazyload">
-                          <img class="blur-up lazyload" data-src="http://localhost:3000/product-images/<%=item.mainImage.filename%>" src="http://localhost:3000/product-images/<%=item.mainImage.filename%>" alt="Gift For her" title="Gift For her" />
+                          <img class="blur-up lazyload" data-src="<%=item.mainImage.url%>" src="<%=item.mainImage.url%>" alt="Gift For her" title="Gift For her" />
                           <div class="slideshow__text-wrap slideshow__overlay classic bottom">
                               <div class="slideshow__text-content left">
                                 <div class="container">
@@ -247,7 +247,7 @@
 
             <div class="section">
               <div class="hero hero--large hero__overlay bg-size">
-                  <img class="bg-img" src="http://localhost:3000/product-images/<%= side.filename %>" alt="" />
+                  <img class="bg-img" src="<%= side.url %>" alt="" />
                   <div class="hero__inner" >
                     <div class="container col-4 col-md-12">
                       <div class="wrap-text  center text-medium font-bold col-8">
