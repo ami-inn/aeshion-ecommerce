@@ -221,7 +221,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Email</label>
-                                                <input type="text" class="form-control" name="email" value="<%= user.email %>">
+                                                <input type="text" class="form-control" name="email" value="<%= user.email %>" readonly>
                                           </div>
                                         </div>
                                   
@@ -454,7 +454,7 @@
 
                                     <% coupon.forEach(item=>{ %>
                                 
-                                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 item">
+                                    <div class="col-12 col-sm-6 col-md-4 item">
                                         <div class="coupon-box">
 
 
@@ -496,7 +496,7 @@
 
                                    
                                 
-                                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 item">
+                                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 item">
                                         <div class="coupon-box">
 
 
@@ -507,7 +507,7 @@
 
                                             <!-- product name -->
                                             <div class="product-name">
-                                                <b>Balance :   <span style="color: rgb(4, 201, 132);"> ₹<%= user.wallet%></span></b>
+                                                <b style="font-size: 16px;">Balance :   <span style="color: rgb(4, 201, 132); font-size: 16px;" > ₹<%= user.wallet%></span></b>
                                               
                                             </div>
                                      
