@@ -327,8 +327,8 @@
                                         <div class="col-3 col-md-3 col-lg-3 text-center filters-toolbar__item filters-toolbar__item--count d-flex justify-content-center align-items-center">
                                             <span class="filters-toolbar__product-count">Showing: 
                                                 
-                                                <% if (typeof prdctCount !== "undefined") { %>
-                                                     <%= prdctCount %> 
+                                                <% if (typeof productCount !== "undefined") { %>
+                                                     <%= productCount %> 
                                                <%  } %> 
                                                
 
@@ -424,11 +424,11 @@
                                             <!-- start product image -->
                                             <a href="/single-product/<%=item._id%>">
                                                 <!-- image -->
-                                                <img class="primary blur-up lazyload" data-src="http://localhost:3000/product-images/<%= item.mainImage.filename%>" src="http://localhost:3000/product-images/<%= item.mainImage.filename%>" alt="image" title="product">
+                                                <img class="primary blur-up lazyload" data-src="<%= item.mainImage.url%>" src="<%= item.mainImage.url%>" alt="image" title="product">
                                                 <!-- End image -->
                                                 
                                                 <!-- Hover image -->
-                                                <img class="hover blur-up lazyload" data-src="http://localhost:3000/product-images/<%= item.mainImage.filename%>" src="http://localhost:3000/product-images/<%= item.mainImage.filename%>" alt="image" title="product"> -->
+                                                <img class="hover blur-up lazyload" data-src="<%= item.mainImage.url%>" src="<%= item.mainImage.url%>" alt="image" title="product"> -->
                                                 <!-- End hover image
                                                 <!-- product label -->
 
