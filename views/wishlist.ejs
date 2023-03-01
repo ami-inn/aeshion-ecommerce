@@ -190,7 +190,7 @@
                             <div class="wishlist-img">
                                 <a href="/single-product/<%=item._id%>">
                                   
-                                    <img class="primary blur-up lazyload" data-src="http://localhost:3000/product-images/<%= item.mainImage.filename%>" src="http://localhost:3000/product-images/<%= item.mainImage.filename%>" alt="image" title="product">
+                                    <img class="primary blur-up lazyload" data-src="<%= item.mainImage.url%>" src="http://localhost:3000/product-images/<%= item.mainImage.filename%>" alt="image" title="product">
                              
                                 </a>
                             </div>
