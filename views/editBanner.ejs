@@ -65,99 +65,129 @@
 		</ul>
 	</section>
     
-    
-    
+    <section class="content" id="content">
+
+        <nav>
+			<i class='bx bx-menu' ></i>
+			<a href="/" class="nav-link">Home</a>
+			<form action="#">
+				<div class="form-input">
+				
+				</div>
+			</form>
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			
+			
+		</nav>
+
         <div class=" p-t-130 p-b-100 font-poppins">
     
         
                 
                      
-                <div class="wrapper wrapper--w680">
-                    <div class="card card-4">
-                    <div class="card-body">
-                        <h2 class="title">Edit Banner</h2>
-                        
-                        
-                        <form id="addProductForm"  action="/admin/edit-banner" method="post" enctype="multipart/form-data">
-                            <input type="text" name="_id" value="<%=banner._id%>" style="height: 0px; visibility: hidden;">
-                            <div class="row row-space">
+            <div class="wrapper wrapper--w680">
+                <div class="card card-4">
+                <div class="card-body">
+                    <h2 class="title">Edit Banner</h2>
+                    
+                    
+                    <form id="addProductForm"  action="/admin/edit-banner" method="post" enctype="multipart/form-data">
+                        <input type="text" name="_id" value="<%=banner._id%>" style="height: 0px; visibility: hidden;">
+                        <div class="row row-space">
 
 
-                                <div class="col-2">
-                                    <div class="input-group">
-                                        <label class="label">Banner name</label>
-                                        <input class="input--style-4" type="text" name="name" value="<%=banner.name%>">
-                                    </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Banner name</label>
+                                    <input class="input--style-4" type="text" name="name" value="<%=banner.name%>">
                                 </div>
+                            </div>
 
-                                <div class="col-2">
-                                    <div class="input-group">
-                                        <label  for="Category">Category </label>
-                                        <!-- <input type="text" name="category" placeholder="Category"> -->
-                                        <select class="input--style-4" name="category" placeholder="category" required>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label  for="Category">Category </label>
+                                    <!-- <input type="text" name="category" placeholder="Category"> -->
+                                    <select class="input--style-4" name="category" placeholder="category" required>
+                                      
+                                            <option value="main-banner">Main Banner</option>
                                           
-                                                <option value="main-banner">Main Banner</option>
-                                              
-                                                <option value="sub-banner">sub Banner</option>
-                                              
-                                         
-                                        </select>
+                                            <option value="sub-banner">sub Banner</option>
+                                          
+                                     
+                                    </select>
+                                    
+                                </div>
+                            </div>                        
+
+                        </div>
+                    
+
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Main-Img</label>
+                                    <input class="input--style-4" style="margin-bottom: 10px;" type="file" name="image" accept="image/*">
+                                    <div id="singleImage">
+
+                                        <img src="<%=banner.mainImage.url %>" alt="" style="width: 250px;" />
                                         
                                     </div>
-                                </div>                        
-
+                                </div>
                             </div>
-                        
 
-                            <div class="row row-space">
-                                <div class="col-2">
-                                    <div class="input-group">
-                                        <label class="label">Main-Img</label>
-                                        <input class="input--style-4" style="margin-bottom: 10px;" type="file" name="image" accept="image/*">
-                                        <div id="singleImage">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">side-Img</label>
+                                    <input class="input--style-4" style="margin-bottom: 10px;" type="file" name="images" accept="image/*"  multiple >
 
-                                            <img src="http://localhost:3000/product-images/<%=banner.mainImage.filename %>" alt="" style="width: 250px;" />
-                                            
+                                    <% banner.sideImages.forEach(item => { %>
+                                        <div id="multiImage">
+                                            <img src="<%=item.url %>" style="width: 250px;" alt="" />
                                         </div>
-                                    </div>
-                                </div>
+                                        <% }) %>
 
-                                <div class="col-2">
-                                    <div class="input-group">
-                                        <label class="label">side-Img</label>
-                                        <input class="input--style-4" style="margin-bottom: 10px;" type="file" name="images" accept="image/*"  multiple >
-
-                                        <% banner.sideImages.forEach(item => { %>
-                                            <div id="multiImage">
-                                                <img src="http://localhost:3000/product-images/<%=item.filename %>" style="width: 250px;" alt="" />
-                                            </div>
-                                            <% }) %>
-
-                                    </div>
                                 </div>
-                                                       
-                                <div class="col-2">
-                                    <div class="input-group">
-                                        <label class="label">Description</label>
-                                        <textarea class="input--style-4" name="description" rows="4" form="addProductForm" value="<%=banner.description%>" placeholder="Description"><% banner.description %></textarea>
-                                    </div>
-                                </div>
-                              
-                              
                             </div>
-    
-                            <div class="p-t-15">
-                                <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
+                                                   
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Description</label>
+                                    <textarea class="input--style-4" name="description" rows="4" form="addProductForm" value="<%=banner.description%>" placeholder="Description"><%= banner.description %></textarea>
+                                </div>
                             </div>
-                        </form>
-                    </div>
+                          
+                          
+                        </div>
+
+                        <div class="p-t-15">
+                            <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-    
-    
-       
-    
         </div>
+
+
+   
+
+    </div>
+
+
+    </section>
+
+
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+        <script src="/assets/js/admindash.js"></script>
+        <script src="/assets/js/toggle.js"></script>
+    
+    
+      
     
     
     

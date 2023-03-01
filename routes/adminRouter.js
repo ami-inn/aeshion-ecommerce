@@ -51,10 +51,10 @@ router.post('/list-product/:id',controller.listProduct)
 // BANNER MANAGEMENT
 
 router.get('/add-banner',controller.getaddBanner)
-router.post('/add-banner',upload.fields([{name:'images', maxCount:5},{name:'image', maxCount:'1'}]),controller.postaddBanner)
+router.post('/add-banner',upload.fields([{name:'images', maxCount:3},{name:'image', maxCount:'1'}]),controller.postaddBanner)
 router.get('/banner-management',controller.bannermanagement)
 router.get('/edit-banner/:id',controller.geteditBanner)
-router.post('/edit-banner',upload.fields([{name:'images', maxCount:5},{name:'image', maxCount:'1'}]),controller.posteditBanner)
+router.post('/edit-banner',upload.fields([{name:'images', maxCount:3},{name:'image', maxCount:'1'}]),controller.posteditBanner)
 router.post('/unlist-banner/:id',controller.unlistBanner)
 router.post('/list-banner/:id',controller.listBanner)
 

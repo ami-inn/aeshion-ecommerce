@@ -443,10 +443,23 @@ module.exports = {
         try {
             const { name, category, description } = req.body
 
-            console.log(req.body)
+            let mainImage=req.files.image[0], sideImages=req.files.images
+
+           
+            let imageFile=await cloudinary.uploader.upload(mainImage.path,{folder:'Aeshion'})
+            mainImage=imageFile;
+
+        
+
+            for (let i in sideImages) {
+                let imageFile=await cloudinary.uploader.upload(sideImages[i].path,{folder:'Aeshion'})
+                sideImages[i]=imageFile
+            }
+
+            
 
             const banner = new bannerModel({
-                name, category, description, mainImage: req.files.image[0], sideImages: req.files.images
+                name, category, description, mainImage,sideImages
             })
 
             banner.save(async (err, data) => {
@@ -497,17 +510,32 @@ module.exports = {
         try {
             const { name, category, description, _id } = req.body
 
-            console.log(req.body)
+            
+            let mainImage=req.files?.image?.[0]
+            let sideImages=req.files?.images
 
+            if(req.files?.image){
 
+                let imageFile=await cloudinary.uploader.upload(mainImage.path,{folder:'Aeshion'})
+                mainImage=imageFile
+            }
 
-            console.log(req.files)
+            if(req.files?.images){
+
+            for(let i in req.files.images){
+                let imageFile=await cloudinary.uploader.upload(sideImages[i].path,{folder:'Aeshion'})
+                sideImages[i]=imageFile
+
+            }
+        }
+
+            
 
             if (req.files.image && req.files.images) {
                 console.log('first')
                 await bannerModel.findByIdAndUpdate(_id, {
                     $set: {
-                        name, category, description, mainImage: req.files.image[0], sideImages: req.files.images
+                        name, category, description, mainImage, sideImages
                     }
                 })
 
@@ -519,7 +547,7 @@ module.exports = {
                 await bannerModel.findByIdAndUpdate(_id, {
                     $set: {
                         name, category, description,
-                        sideImages: req.files.images
+                        sideImages
                     }
                 })
 
@@ -530,7 +558,7 @@ module.exports = {
                 console.log('third')
                 await bannerModel.findByIdAndUpdate(_id, {
                     $set: {
-                        name, category, description, mainImage: req.files.image[0]
+                        name, category, description, mainImage
                     }
                 })
 
@@ -615,7 +643,8 @@ module.exports = {
     couponManagement: async (req, res) => {
 
         const coupon = await couponModel.find().lean()
-        console.log(coupon)
+    
+
 
         res.render('couponManagement', { coupon })
     },

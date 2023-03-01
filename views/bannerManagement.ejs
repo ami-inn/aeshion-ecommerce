@@ -107,10 +107,16 @@
 
             <div>
 
+				<% if(!banner[0]){ %>
+
+					<a href="/admin/add-Banner">
+						<button class="btn btn-dark w-30"  >Add Banner</button>
+					</a>
+
+					<% } %>
+
                 
-                <!-- <a href="/admin/add-Banner">
-                    <button class="btn btn-dark w-30"  >Add Banner</button>
-                </a> -->
+               
                 
             </div>
             </div>
@@ -140,7 +146,7 @@
 
                             <th scope="row"><%= item.name  %> </th>
                            
-                            <td><img src="http://localhost:3000/product-images/<%= item.mainImage.filename%>" style="height: 50px;" alt=""></td>
+                            <td><img src="<%= item.mainImage.url %>" style="height: 50px;" alt=""></td>
      
 
                             <td><%=item.description %> </td>
@@ -149,7 +155,7 @@
                             <td>
                                 <div style="display: flex; align-items: center; gap: 10px;">
 
-                                    <a href="/admin/edit-banner/<%=item._id%>" style="background-color: rgb(88, 88, 195); color: white; padding: 10px 40px; font-size: 18px; font-weight: 300;">Edit</a>
+                                    <a href="/admin/edit-banner/<%=item._id%>" style="background-color: rgb(88, 88, 195); color: white; padding: 10px 40px; font-size: 18px; font-weight: 300;">Update</a>
                                    
 
 
