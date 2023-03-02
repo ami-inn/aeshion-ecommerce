@@ -46,9 +46,14 @@
                           <a href="/login">                        
                             <%= userName ? userName : "Login" %>
                           <% }else{ %>
-                            <a href="/profile" style="color: white; font-size: 15px; font-weight: bold;"> 
+
+                            <a class="d-md-none d-block" href="/profiel" style="color: black;">profile</a>
+
+
+                            <a href="/profile" class="d-none d-md-block" style="color: white; font-size: 15px; font-weight: bold;"> 
                          
                               <ion-icon name="person-sharp"></ion-icon>
+
 
                           <%  } %> 
                        

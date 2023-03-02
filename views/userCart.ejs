@@ -189,7 +189,7 @@
 
                 <div class="col-12 col-sm-12 col-md-8 col-lg-8 main-col d-none d-md-block">
                 	
-                		<table>
+                	<table>
                             <thead class="cart__row cart__header">
                                 <tr>
                                     <th colspan="2" class="text-center">Product</th>
@@ -199,6 +199,7 @@
                                     <th class="action">&nbsp;</th>
                                 </tr>
                             </thead>
+
                     		<tbody>
 
                                 <% product.forEach((item,index)=>{%>
@@ -537,71 +538,45 @@
                                  
                	</div>
 
-                 <div class="col-12 col-sm-12 col-md-8 col-lg-8 main-col  d-md-none">
-                	
-                  <table>
-                          <thead>
+                 <div class="col-12 d-block d-md-none">
+                	                  
+                    <table>
 
+                        <thead class="cart__row cart__header">
                             <tr class="text-center">
-                                <th colspan="2" class="text-center">Product</th>
-                                <th colspan="2" class="text-center">quantity</th>
-                                <th class="text-center">Price</th>     
-                                
+                                <th >Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                               
                             </tr>
-                                                        
-                                                         
-                              
-                          </thead>
-                      <tbody >
+                        </thead>
 
-                              <% product.forEach((item,index)=>{%>
+                        <tbody>
 
-                                  <tr class="text-center">
-                                    
-                                        <td class="cart__image-wrapper cart-flex-item">
-                                          <a href="#"><img class="cart__image" src="<%= item.mainImage.url%>" alt="Elastic Waist Dress - Navy / Small"></a>
-                                          <a href="#"><%= item.name %>  </a>
-                                        </td>
+                            <% product.forEach((item,index)=>{%>
 
+                                <tr class="text-center">
 
-                                        <td class="cart__update-wrapper cart-flex-item text-right">
-                                            <div class="cart__qty text-center">
-                                                <div class="qtyField">
-                                                    
-                                                    <button style=" padding:2px 6px; font-weight: bold; width:30px; height:35px; border-radius:0; float:left;" onclick="decQuantity('<%=cart[index].id%>','<%=item.price%>','<%=item.mrp%>')"><i class="icon icon-minus"></i></button>
-                                                    <input style="height: 35px;" class="cart__qty-input qty" type="text" name="updates[]"id="<%='q'+cart[index].id%>"  value="<%=cart[index].quantity%>"  pattern="[0-9]*" readonly>
-                                                    <button style=" padding:2px 6px; font-weight: bold; width:30px; height:35px; border-radius:0; float:left;" onclick="addQuantity('<%=cart[index].id%>','<%=item.price%>','<%=item.mrp%>')"><i class="icon icon-plus"></i></button>
-                                                
-                                                </div>
-                                            </div>
-                                        </td>
+                                    <td style="width: 8px;"><%= item.name  %></td>
+                                    <td>₹<%= item.price  %></td>
+                                    <td><%= cart[index].quantity%></td>
+                                    <td>₹<%=item.price * cart[index].quantity%></td>
+                                  
 
-                                      
-                                       
-                                     
-                                    
-                                      <td  style="font-weight: bold;">
-                                          <span class="money" > ₹<%= item.price %> </span>
-                                      </td>
-
-                                       </tr>
-
-                                  <% }) %> 
+                                </tr>
 
 
-                            
+                                <% }) %>
 
 
-                             
-                             
-                          </tbody>
-                      <tfoot>
-                              <tr>
-                                  <td colspan="3" class="text-left"><a href="/shop" class="btn--link cart-continue"><i class="icon icon-arrow-circle-left"></i> Continue shopping</a></td>
-                                  <td colspan="3" class="text-right"><button type="submit" name="update" class="btn--link cart-update"><i class="fa fa-refresh"></i> Update</button></td>
-                              </tr>
-                          </tfoot>
-                  </table>
+                        </tbody>
+
+                        
+
+
+
+                    </table>
                   
                   <div class="currencymsg">We processes all orders in USD. While the content of your cart is currently displayed in USD, the checkout will use USD at the most current exchange rate.</div>
                     <hr>
