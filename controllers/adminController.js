@@ -22,8 +22,20 @@ module.exports = {
         if (req.session.admin) {
 
             const order = await orderModel.find().lean()
-            const monthlyDataArray = await orderModel.aggregate([{ $match: { orderStatus: "delivered" } }, { $group: { _id: { $month: "$createdAt" }, sum: { $sum: "$total" } } }])
+            const monthlyDataArray = await orderModel.aggregate([{ $match: { paid:true } }, { $group: { _id: { $month: "$createdAt" }, sum: { $sum: "$total" } } }])
             const monthlyReturnArray = await orderModel.aggregate([{ $match: { orderStatus: "returned" } }, { $group: { _id: { $month: '$createdAt' }, sum: { $sum: '$total' } } }])
+
+
+            let categoryArray = await orderModel.aggregate([{ $match: { paid: true } },  { $group: { _id: "$product.category", count: { $sum: 1 }, price: { $sum: "$product.price" } } }])
+
+            const categoryNames=categoryArray.map(item=>{
+                return item._id
+            })
+            const categorySales=categoryArray.map(item=>{
+                return item.price
+            })
+
+            console.log(categoryNames)
 
 
             let deliveredOrder = 0
@@ -71,9 +83,14 @@ module.exports = {
             let monthlyDataObject = {}
             let monthlyReturnObject = {}
 
+            
+
+
             monthlyDataArray.map(item => {
                 monthlyDataObject[item._id] = item.sum
             })
+
+        
 
             monthlyReturnArray.map(item => {
                 monthlyReturnObject[item._id] = item.sum
@@ -89,6 +106,7 @@ module.exports = {
                 monthlyData[i - 1] = monthlyDataObject[i] ?? 0
             }
 
+            
 
 
 
@@ -96,7 +114,8 @@ module.exports = {
 
 
 
-            res.render('adminHome', { totalOrders, users, totalRevenue, monthlyData, monthlyReturn, deliveredOrder, PendingOrder, returnOrder, cancelOrder })
+
+            res.render('adminHome', {categorySales,categoryNames, totalOrders, users, totalRevenue, monthlyData, monthlyReturn, deliveredOrder, PendingOrder, returnOrder, cancelOrder })
         } else {
             res.redirect('/admin/login')
         }
@@ -707,7 +726,9 @@ module.exports = {
 
     getorderManagement: async (req, res) => {
 
-        const orders = await orderModel.find().sort({ createdAt: -1 }).lean()
+        let filter= req.query.filter ?? "";
+
+        const orders = await orderModel.find({orderStatus:new RegExp(filter, 'i')}).sort({ createdAt: -1 }).lean()
 
 
         // grouping the orders with orderIs

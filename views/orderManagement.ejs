@@ -138,7 +138,24 @@
 		<main class="content-main">		
             
             <div class="product-nav" style="display: flex;justify-content: space-between;"> 
-		 <h3 style="font-size: 20px;text-transform: uppercase; font-weight: 500;">order Management</h3>
+		    <h3 style="font-size: 20px;text-transform: uppercase; font-weight: 500;">order Management</h3>
+
+			<form action="/admin/order-management" method="get">
+
+				<select name="filter" class="form-select order-status-filter" onchange="this.form.submit()" aria-label=".form-select-lg example" class="order-status-filter">
+				  <!-- onchange value change when select then it automaticaly submit -->
+					<option selected >filte by status</option>
+
+					<option value="">all</option>
+					
+				  <option value="pending">Pending</option>
+				  
+				  <option value="delivered">Delivered</option>
+				  <option value="cancelled">Cancelled</option>
+				  <option value="returnProcessing">Return Processing</option>
+				  <option value="returned">Returned</option>
+			  </select>
+			</form>
 
             </div>
 

@@ -896,7 +896,7 @@ module.exports = {
             const { payment, address: addressId, couponcode, walletUse } = req.body
 
 
-            console.log(req.body)
+            
             const _id = req.session.user.id
 
             const user = await userModel.findById({ _id }).lean()
@@ -908,6 +908,8 @@ module.exports = {
 
 
 
+
+
             const cartList = cart.map((item) => {
                 cartQuantities[item.id] = item.quantity;
                 return item.id;
@@ -916,6 +918,7 @@ module.exports = {
 
 
             const { address } = await userModel.findOne({ "address.id": addressId }, { _id: 0, address: { $elemMatch: { id: addressId } } })
+            console.log(address)
             const product = await productModel.find({ _id: { $in: cartList } }).lean()
 
 
@@ -937,6 +940,16 @@ module.exports = {
                  tempCashback=coupon.cashback
             }else{
                  tempCashback=0
+            }
+
+            if(walletUse>0){
+                price = (price - walletUse) 
+
+                if (price < 0) {
+                    
+                    price = 0
+                }
+
             }
 
         
@@ -982,8 +995,8 @@ module.exports = {
                         order_currency: "INR",
                         customer_details: {
                             customer_id: _id,
-                            customer_email: 'ameenameen772@gmail.com',
-                            customer_phone: '9946953906',
+                            customer_email: user.email,
+                            customer_phone: user.mobile.toString(),
                         },
                         order_meta: {
                             return_url: "http://localhost:3000/return?order_id={order_id}",
@@ -1248,18 +1261,14 @@ module.exports = {
 
 
 
-                    // if (req.session.wallet) {
+                    if (req.session.wallet) {
 
-                    //     let walletAmount = req.session.wallet.amount
+                        let walletAmount = req.session.wallet.amount
+                        totalPrice = totalPrice - (walletAmount / cartLength).toFixed(2)
+                       
+                    }
 
-                    //     console.log('walletAmount',walletAmount)
-
-                    //     totalPrice = totalPrice - (walletAmount / cartLength).toFixed(2)
-
-                    //     console.log('totalprice',totalPrice)
-                    // }
-
-                    // totalPrice < 0 ? totalPrice = 0 : totalPrice;
+                    totalPrice < 0 ? totalPrice = 0 : totalPrice;
 
                     
 
@@ -1330,6 +1339,7 @@ module.exports = {
 
                 req.session.coupon=null
                 req.session.wallet=null
+                req.session.address=null
 
                
 

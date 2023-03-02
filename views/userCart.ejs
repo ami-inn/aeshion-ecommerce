@@ -537,29 +537,50 @@
                                  
                	</div>
 
-                 <div class="col-12 col-sm-12 col-md-8 col-lg-8 main-col d-block d-md-none">
+                 <div class="col-12 col-sm-12 col-md-8 col-lg-8 main-col  d-md-none">
                 	
                   <table>
-                          <thead class="cart__row cart__header">
+                          <thead>
+
+                            <tr class="text-center">
+                                <th colspan="2" class="text-center">Product</th>
+                                <th colspan="2" class="text-center">quantity</th>
+                                <th class="text-center">Price</th>     
+                                
+                            </tr>
                                                         
-                                  <th colspan="2" class="text-center">Product</th>
-                                  <th class="text-center">Price</th>                             
+                                                         
                               
                           </thead>
-                      <tbody>
+                      <tbody >
 
                               <% product.forEach((item,index)=>{%>
 
-                                  <tr style="display: flex;gap: 110px; justify-content: space-between; align-items: center;">
+                                  <tr class="text-center">
                                     
                                         <td class="cart__image-wrapper cart-flex-item">
-                                          <a href="#"><img class="cart__image" src="http://localhost:3000/product-images/<%= item.mainImage.filename%>" alt="Elastic Waist Dress - Navy / Small"></a>
+                                          <a href="#"><img class="cart__image" src="<%= item.mainImage.url%>" alt="Elastic Waist Dress - Navy / Small"></a>
                                           <a href="#"><%= item.name %>  </a>
                                         </td>
+
+
+                                        <td class="cart__update-wrapper cart-flex-item text-right">
+                                            <div class="cart__qty text-center">
+                                                <div class="qtyField">
+                                                    
+                                                    <button style=" padding:2px 6px; font-weight: bold; width:30px; height:35px; border-radius:0; float:left;" onclick="decQuantity('<%=cart[index].id%>','<%=item.price%>','<%=item.mrp%>')"><i class="icon icon-minus"></i></button>
+                                                    <input style="height: 35px;" class="cart__qty-input qty" type="text" name="updates[]"id="<%='q'+cart[index].id%>"  value="<%=cart[index].quantity%>"  pattern="[0-9]*" readonly>
+                                                    <button style=" padding:2px 6px; font-weight: bold; width:30px; height:35px; border-radius:0; float:left;" onclick="addQuantity('<%=cart[index].id%>','<%=item.price%>','<%=item.mrp%>')"><i class="icon icon-plus"></i></button>
+                                                
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                      
                                        
                                      
                                     
-                                      <td class="text-center w-20" style="font-weight: bold;">
+                                      <td  style="font-weight: bold;">
                                           <span class="money" > ₹<%= item.price %> </span>
                                       </td>
 
