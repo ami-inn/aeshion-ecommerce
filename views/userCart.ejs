@@ -544,6 +544,7 @@
 
                         <thead class="cart__row cart__header">
                             <tr class="text-center">
+                                <th style="color: white;">image</th>
                                 <th >Product</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
@@ -556,12 +557,26 @@
 
                             <% product.forEach((item,index)=>{%>
 
-                                <tr class="text-center">
+                                <tr class="text-center" style="border: 1px solid black;">
+
+                                    <td style="width: 8px;"><img src="<%= item.mainImage.url  %>" style="height: 50px;" alt=""></td>
 
                                     <td style="width: 8px;"><%= item.name  %></td>
                                     <td>₹<%= item.price  %></td>
-                                    <td><%= cart[index].quantity%></td>
-                                    <td>₹<%=item.price * cart[index].quantity%></td>
+                                    
+                                    <td class="cart__update-wrapper cart-flex-item text-right">
+                                        <div class="cart__qty text-center">
+                                            <div class="qtyField">
+                                                
+                                                <button style=" padding:2px 6px; font-weight: bold; width:30px; height:35px; border-radius:0; float:left;" onclick="decQuantity('<%=cart[index].id%>','<%=item.price%>','<%=item.mrp%>')"><i class="icon icon-minus"></i></button>
+                                                <input style="height: 35px;" class="cart__qty-input qty" type="text" name="updates[]"id="<%='mq'+cart[index].id%>"  value="<%=cart[index].quantity%>"  pattern="[0-9]*" readonly>
+                                                <button style=" padding:2px 6px; font-weight: bold; width:30px; height:35px; border-radius:0; float:left;" onclick="addQuantity('<%=cart[index].id%>','<%=item.price%>','<%=item.mrp%>')"><i class="icon icon-plus"></i></button>
+                                            
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td ><p class="money" style="font-weight: bold;"  id="<%='mobileprice'+cart[index].id%>">₹<%=item.price * cart[index].quantity%></p> </td>
                                   
 
                                 </tr>
@@ -761,16 +776,20 @@ let totalPrice=Number('<%=totalPrice%>')
             if(response.data.user?.acknowledged){
                 
                 var quantity=document.getElementById('q'+id).value
+                var mobilequantity=document.getElementById('mq'+id).value
                 var priceTag=document.getElementById('price'+id)
                 var totalDiscountTag=document.getElementById('totalDiscount')
                 var totalPriceTag=document.getElementById('totalPrice')
                 var totalAmountTag=document.getElementById('totalAmount')
+                var mobileTotal=document.getElementById('mobileprice'+id)
 
                 
 
                 quantity++
 
                 priceTag.innerHTML= '₹'+quantity*price;
+
+                mobileTotal.innerHTML= '₹'+quantity*price;
 
                 totalMrp=Number(totalMrp)+Number(mrp)
                 totalPrice=Number(totalPrice)+Number(price)
@@ -782,6 +801,7 @@ let totalPrice=Number('<%=totalPrice%>')
                 totalAmountTag.style.color='grey'
 
                 document.getElementById('q'+id).value=quantity;
+                document.getElementById('mq'+id).value=quantity;
                 
 
             }
@@ -804,6 +824,7 @@ let totalPrice=Number('<%=totalPrice%>')
                 }
 
                 var priceTag=document.getElementById('price'+id)
+                var mobileTotal=document.getElementById('mobileprice'+id)
                 var totalDiscountTag=document.getElementById('totalDiscount')
                 var totalPriceTag=document.getElementById('totalPrice')
                 var totalAmountTag=document.getElementById('totalAmount')
@@ -813,6 +834,7 @@ let totalPrice=Number('<%=totalPrice%>')
 
 
                 priceTag.innerHTML= '₹'+quantity*price;
+                mobileTotal.innerHTML= '₹'+quantity*price;
 
                 totalMrp=Number(totalMrp)-Number(mrp)
                 totalPrice=Number(totalPrice)-Number(price)
@@ -824,6 +846,7 @@ let totalPrice=Number('<%=totalPrice%>')
 
 
                 document.getElementById('q'+id).value=quantity;
+                document.getElementById('mq'+id).value=quantity;
             }else{
                 window.location.reload()
             }
