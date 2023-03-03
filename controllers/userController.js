@@ -1366,16 +1366,28 @@ module.exports = {
 
         const user = await userModel.findById({ _id }).lean()
 
-        console.log(_id)
+        let cart = user.cart
+        const cartList = cart.map(item => {
+             return item.id
+         })
+        
+
+      
+
+        
 
         const wishlist = user.wishlist
 
 
         const product = await productModel.find({ _id: { $in: wishlist } }).lean()//$in for each elememnt in cart becaus eit has al ot ids //cart il product inte id ind . product modelil ella productsindum id indavum.aah randu id check cheythal equal aaya product kittum 
 
-        console.log(product)
+     
+       
 
-        res.render('wishlist', { product })
+    
+        
+
+        res.render('wishlist', {product})
 
     },
 

@@ -758,7 +758,7 @@ module.exports = {
 
         const order = await orderModel.findById({ _id }).lean()
 
-        console.log(order)
+    
 
         res.render('singleOrder', { order })
 
@@ -767,14 +767,14 @@ module.exports = {
 
     geteditOrder: async (req, res) => {
         const order = await orderModel.findOne({ _id: req.params.id })
-        console.log(order)
+        
         res.render('edit-order', { order })
     },
 
     posteditOrder: async (req, res) => {
         const { status, _id } = req.body
 
-        console.log(req.body)
+        
 
         if (status == 'returned') {
 

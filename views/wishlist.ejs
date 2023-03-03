@@ -202,9 +202,8 @@
 
                                 <span onclick="removeFromWish('<%=item._id%>')" style="color: red;"><ion-icon name="heart"></ion-icon></span>
 
-
-                                <a href="/addto-cart/<%= item._id  %> " style="color: black;" ><ion-icon name="cart-sharp"></ion-icon></a>
-
+                                <p style="color: black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ; font-weight: 300;" onclick="addtoCart('<%=item._id%>')"  id="<%='cartInclude'+item._id%>" ><ion-icon name="cart-sharp"></ion-icon>addto-cart</p>
+                  
                             </div>
             
                        
@@ -312,6 +311,27 @@
 
 
     <script>
+ 
+    async function addtoCart(proId){
+       
+       axios.get('/addto-cart/'+proId).then((response)=>{
+        console.log('includedddd')
+
+        cartInclude=document.getElementById('cartInclude'+proId)
+
+        
+
+           cartInclude.innerHTML=`
+                                <a href='/cart' style="color: #037C2F;font-weight: 300;"><ion-icon name="cart-sharp"></ion-icon> goto cart </a> `
+
+
+       }).catch((err)=>{
+           console.log('second')
+           location.href="/login"
+       })
+   }
+
+
         async function removeFromWish(id){
             if(confirm('are you want to remove it from wishlist ?')){
                 let response= await axios.get('/remove-wishlist/'+id)
