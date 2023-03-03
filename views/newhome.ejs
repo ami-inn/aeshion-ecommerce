@@ -250,7 +250,7 @@
 
           <% item.sideImages.forEach(side=>{ %>
 
-            <div class="section">
+            <div class="section d-none d-md-block">
               <div class="hero hero--large hero__overlay bg-size">
                   <img class="bg-img" src="<%= side.url %>" alt="" />
                   <div class="hero__inner" >
@@ -266,28 +266,103 @@
             </div>
 
             <% }) %> 
+
+
+        <!-- For Mobile VIeew -->
+
+        <div class="section featured-column mt-3 d-block d-md-none">
+        	<div class="container">
+            	<div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="section-header text-center">
+                            <h2 class="h2">Most Popular From Aeshion</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                
+                     <!--Featured Item-->
+                     <div class="col-12 col-sm-6 col-md-4 col-lg-4 text-center">
+                     	<p>
+                           <a href="#">   
+                              <img class="blur-up lazyload" data-src="assets/images/collection/modern-fi-3.jpg" src="assets/images/collection/modern-fi-3.jpg" alt="feature-row__image">
+                           </a> 
+                        </p>
+                        <h3 class="h4"><a href="#">New Women Fashion/a></h3>
+                        <div class="rte-setting"><p>Coats are only the beginning</p></div>
+                        <a href="/shop" class="btn no-border">Shop Now</a>
+                     </div>
+                     <!--End Featured Item-->
+                </div>
+            </div>
+        </div>
+
+
+          
+        <!--Latest Blog-->
+        <div class="latest-blog section d-block d-md-none">
+        	<div class="container">
+            	<div class="row">
+                	<div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        				<div class="section-header text-center">
+      						<h2 class="h2">Latest From our Blog</h2>
+                            <p>Describe your products,collection, content etc...</p>
+					    </div>
+            		</div>
+                </div>
+            	<div class="row">
+                	<div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                    	<div class="wrap-blog">
+                        	<a href="#" class="article__grid-image">
+              					<img src="assets/images/blog/post-img1.jpg" alt="It's all about how you wear" title="It's all about how you wear" class="blur-up lazyloaded"/>
+				            </a>
+                            <div class="article__grid-meta article__grid-meta--has-image">
+                                <div class="wrap-blog-inner">
+                                    <h2 class="h3 article__title">
+                                      <a href="#">It's all about how you wear</a>
+                                    </h2>
+                                    <span class="article__date">Feb 02, 2023</span>
+                                    <div class="rte article__grid-excerpt">
+                                        We must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and We will give you a complete account...
+                                    </div>
+                                    <ul class="list--inline article__meta-buttons">
+                                    	<li><a href="/blog">Read more</a></li>
+                                    </ul>
+                                </div>
+							</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                    	<div class="wrap-blog">
+                        	<a href="#" class="article__grid-image">
+              					<img src="assets/images/blog/post-img2.jpg" alt="27 Days of Spring Fashion Recap" title="27 Days of Spring Fashion Recap" class="blur-up lazyloaded"/>
+				            </a>
+                            <div class="article__grid-meta article__grid-meta--has-image">
+                                <div class="wrap-blog-inner">
+                                    <h2 class="h3 article__title">
+                                      <a href="#">27 Days of Spring Fashion Recap</a>
+                                    </h2>
+                                    <span class="article__date">jan 02, 2023</span>
+                                    <div class="rte article__grid-excerpt">
+                                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab...
+                                    </div>
+                                    <ul class="list--inline article__meta-buttons">
+                                    	<li><a href="/blog">Read more</a></li>
+                                    </ul>
+                                </div>
+							</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End Latest Blog-->
              
 
 
       
           <!--End Hero Parallax Section2-->
           
-          <!--Hero Parallax Section3-->
-          <!-- <div class="section">
-            <div class="hero hero--large hero__overlay bg-size">
-                <img class="bg-img" src="assets/images/parallax-banners/home9-parallax-banner3.jpg" alt="" />
-          <div class="hero__inner">
-                      <div class="container">
-                        <div class="wrap-text  center text-medium font-bold">
-                      <h2 class="h2 mega-title">Women Wallets</h2>
-                      <div class="rte-setting mega-subtitle">Carry this stylist wallets for party</div>
-                      <a href="#" class="btn">Explore more</a>
-                  </div>
-                      </div>
-                  </div>            
-              </div>
-          </div> -->
-          <!--End Hero Parallax Section3-->
           
       </div>
 
@@ -328,6 +403,12 @@
         <% } %>
 
       <% }) %> 
+
+
+
+
+
+
 
    
     <!--End Body Content-->
