@@ -493,7 +493,7 @@ module.exports = {
 
         const product = await productModel.find({ _id: { $in: cartList } }).lean()//$in for each elememnt in cart becaus eit has al ot ids //cart il product inte id ind . product modelil ella productsindum id indavum.aah randu id check cheythal equal aaya product kittum 
 
-        console.log(product)
+    
 
         let totalPrice = 0;
 
@@ -998,8 +998,11 @@ module.exports = {
                             customer_email: user.email,
                             customer_phone: user.mobile.toString(),
                         },
+                        
                         order_meta: {
-                            return_url: "http://localhost:3000/return?order_id={order_id}",
+                            // return_url: "http://localhost:3000/return?order_id={order_id}",
+
+                            return_url: "https://aeshion.shop/return?order_id={order_id}",
                         },
                     },
                 };

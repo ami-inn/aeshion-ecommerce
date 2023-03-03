@@ -557,29 +557,35 @@
 
                             <% product.forEach((item,index)=>{%>
 
-                                <tr class="text-center" style="border: 1px solid black;">
+                                <div style="margin-bottom: 5px;">
 
-                                    <td style="width: 8px;"><img src="<%= item.mainImage.url  %>" style="height: 50px;" alt=""></td>
+                                    <tr class="text-center">
 
-                                    <td style="width: 8px;"><%= item.name  %></td>
-                                    <td>₹<%= item.price  %></td>
-                                    
-                                    <td class="cart__update-wrapper cart-flex-item text-right">
-                                        <div class="cart__qty text-center">
-                                            <div class="qtyField">
+                                        <td style="width: 8px;"><img src="<%= item.mainImage.url  %>" style="height: 50px;" alt=""></td>
+    
+                                        <td style="width: 8px;"><%= item.name  %></td>
+                                        <td>₹<%= item.price  %></td>
+                                        
+                                        <td class="cart__update-wrapper cart-flex-item text-right">
+                                            <div class="cart__qty text-center">
+                                                <div class="qtyField">
+                                                    
+                                                    <button style=" padding:2px 6px; font-weight: bold; width:30px; height:35px; border-radius:0; float:left;" onclick="decQuantity('<%=cart[index].id%>','<%=item.price%>','<%=item.mrp%>')"><i class="icon icon-minus"></i></button>
+                                                    <input style="height: 35px;" class="cart__qty-input qty" type="text" name="updates[]"id="<%='mq'+cart[index].id%>"  value="<%=cart[index].quantity%>"  pattern="[0-9]*" readonly>
+                                                    <button style=" padding:2px 6px; font-weight: bold; width:30px; height:35px; border-radius:0; float:left;" onclick="addQuantity('<%=cart[index].id%>','<%=item.price%>','<%=item.mrp%>')"><i class="icon icon-plus"></i></button>
                                                 
-                                                <button style=" padding:2px 6px; font-weight: bold; width:30px; height:35px; border-radius:0; float:left;" onclick="decQuantity('<%=cart[index].id%>','<%=item.price%>','<%=item.mrp%>')"><i class="icon icon-minus"></i></button>
-                                                <input style="height: 35px;" class="cart__qty-input qty" type="text" name="updates[]"id="<%='mq'+cart[index].id%>"  value="<%=cart[index].quantity%>"  pattern="[0-9]*" readonly>
-                                                <button style=" padding:2px 6px; font-weight: bold; width:30px; height:35px; border-radius:0; float:left;" onclick="addQuantity('<%=cart[index].id%>','<%=item.price%>','<%=item.mrp%>')"><i class="icon icon-plus"></i></button>
-                                            
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
+                                        </td>
+    
+                                        <td ><p class="money" style="font-weight: bold;"  id="<%='mobileprice'+cart[index].id%>">₹<%=item.price * cart[index].quantity%></p> </td>
+                                      
+    
+                                    </tr>
 
-                                    <td ><p class="money" style="font-weight: bold;"  id="<%='mobileprice'+cart[index].id%>">₹<%=item.price * cart[index].quantity%></p> </td>
-                                  
+                                </div>
 
-                                </tr>
+                            
 
 
                                 <% }) %>
