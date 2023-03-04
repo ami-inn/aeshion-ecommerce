@@ -269,7 +269,7 @@
                                                 <span id="SaveAmount-product-template" class="product-single__save-amount">
                                                 <span class="money"><%= product.mrp-product.price %> </span>
                                                 </span>
-                                                <span class="off">(<span>16</span>%)</span>
+                                                <span class="off">(<span><%=((product.mrp-product.price)/product.mrp*100).toFixed(1) %></span>%)</span>
                                             </span>  
                                         </p>
                                         <div class="orderMsg" data-user="23" data-time="24">
