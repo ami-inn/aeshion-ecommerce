@@ -202,6 +202,21 @@
                                 </div>
                               </div>
 
+                             
+
+                              <% if (typeof  fieldRequired !== "undefined") { %>
+                                <b style="color: rgb(237, 94, 94);"><%= fieldRequired  %></b>
+                            <% } %>
+
+                            <% if (typeof   passworder  !== "undefined") { %>
+                                <b style="color: rgb(237, 94, 94);"><%=  passworder  %></b>
+                            <% } %>
+
+                            <% if (typeof   duplicate  !== "undefined") { %>
+                                <b style="color: rgb(237, 94, 94);"><%=  duplicate  %></b>
+                            <% } %>
+                           
+
                            
 
                              

@@ -31,7 +31,7 @@ module.exports = {
         const user = await userModel.findOne({ email: req.body.email })
 
         if (user) {
-            return res.render('userSignup', { duplicate: 'user already found' })
+            return res.render('userSignup', { duplicate: 'user email already found' })
         }
 
         if (
