@@ -28,6 +28,7 @@ module.exports = {
 
     postUserSignup: async (req, res) => {
 
+
         const user = await userModel.findOne({ email: req.body.email })
 
         if (user) {
@@ -49,7 +50,15 @@ module.exports = {
                 res.render('userSignup', { passworder })
             } else {
                 randomOtp = Math.floor(1000 + Math.random() * 9000)
+
+            
+                
+
                 req.session.otp = randomOtp
+
+
+
+
                 console.log(randomOtp)
                 req.session.tempUser = {
                     email: req.body.email,
@@ -249,7 +258,7 @@ module.exports = {
                 return res.redirect("/login")
             }
             console.log('password error')
-            return res.render('changePassword', { message: 'password not mathch' })
+            return res.render('changePassword', { message: 'password not mathch', email: req.session.tempuser.email  })
         }
 
         catch (err) {
