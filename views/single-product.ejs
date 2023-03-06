@@ -262,12 +262,12 @@
                                             <span class="visually-hidden">Regular price</span>
                                             <s id="ComparePrice-product-template"><span class="money">₹<%= product.mrp %> </span></s>
                                             <span class="product-price__price product-price__price-product-template product-price__sale product-price__sale--single">
-                                                <span id="ProductPrice-product-template"><span class="money">$<%= product.price %> </span></span>
+                                                <span id="ProductPrice-product-template"><span class="money">₹<%= product.price %> </span></span>
                                             </span>
                                             <span class="discount-badge"> <span class="devider">|</span>&nbsp;
                                                 <span>You Save</span>
                                                 <span id="SaveAmount-product-template" class="product-single__save-amount">
-                                                <span class="money"><%= product.mrp-product.price %> </span>
+                                                <span class="money">₹<%= product.mrp-product.price %> </span>
                                                 </span>
                                                 <span class="off">(<span><%=((product.mrp-product.price)/product.mrp*100).toFixed(1) %></span>%)</span>
                                             </span>  
