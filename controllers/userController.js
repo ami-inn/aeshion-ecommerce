@@ -951,15 +951,7 @@ module.exports = {
                  tempCashback=0
             }
 
-            if(walletUse>0){
-                price = (price - walletUse) 
-
-                if (price < 0) {
-                    
-                    price = 0
-                }
-
-            }
+          
 
         
 
@@ -972,6 +964,16 @@ module.exports = {
 
 
             if (payment != 'cod') {
+
+                if(walletUse>0){
+                    price = (price - walletUse) 
+    
+                    if (price < 0) {
+                        
+                        price = 0
+                    }
+    
+                }
 
                 if (walletUse) {
                     req.session.wallet = {
