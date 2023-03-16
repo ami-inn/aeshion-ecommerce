@@ -40,6 +40,7 @@ module.exports = {
             req.body.email == '' ||
             req.body.password == '' ||
             req.body.mobile == ''
+            
         ) {
             const fieldRequired = ' All Fields Are Required'
             res.render('userSignup', { fieldRequired })
@@ -87,6 +88,7 @@ module.exports = {
         const email = req.session.tempUser.email
         console.log(email)
         res.render('otpVerify')
+
     },
 
     postverifyOtp: (req, res) => {
@@ -107,7 +109,7 @@ module.exports = {
                         name,
                         id: user._id
                     }
-
+                    
                     req.session.tempUser = null
 
                     res.redirect("/login");

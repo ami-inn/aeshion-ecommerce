@@ -9,8 +9,8 @@ module.exports = function sendOtp (email,otp){
             port: 465, // Port for SMTP (usually 465)
             secure: true, // Usually true if connecting to port 465
             auth: {
-              user: "amipk2001@gmail.com", // Your email address
-              pass: "gzpenpqheyoeplcl", // Password (for gmail, your app password)
+              user: process.env.Email, // Your email address
+              pass: process.env.Password, // Password (for gmail, your app password)
             },
           });
 
